@@ -40,9 +40,17 @@ int main(int argc, const char * argv[]) {
 		data_vector.push_back(row);
 	}
 
-	std::cout<<data_vector[15].at(5) << std::endl;
-	std::cout<<data_vector[34].at(5)<< std::endl;
-	std::cout<<data_vector[89].at(5)<< std::endl;
+	std::cout<<data_vector[15].at(5) << std::endl; // testcase
+	std::cout<<data_vector[34].at(5)<< std::endl;// testcase
+	std::cout<<data_vector[89].at(5)<< std::endl;// testcase
 
+
+	//Psuedocode for Graph
+	//Parse through edges file to create 2d matrix using similar code from above
+	//parse all these column values as ints and use sorting algorithm 
+		//possibly use binary serach or another search algorithm to improve efficiency
+	//Create new vertex based on "from" value using all its information
+	//create second vertex based on "to" value using its info
+	//Use graph class to create edges between first column to second column from edges matrix
 
 }
