@@ -1,0 +1,21 @@
+Week 1: 11/16 - 11/30
+    After developing the initial idea for the project, as a group, we started the week by simply
+    cloning the repository and getting accustomed to the system by which we would have to push and
+    pull files. Next, we began our actual work by trying to add out graph's data to the repository,
+    so that as a group we could sift through it and make sense of all of the information in the form
+    that it was given in. In developing a strategy for using the data, we realized that as a group we
+    were uncomfortable with the way the information was distributed amongst various files, and not
+    conviniently in a centralized location. Due to this, we decided to use a different data set instead
+    (originally we were using data from Twitter, but we moved to Twitch data instead). This was a simple
+    change, as we felt we were maintaining the integrity of our original project idea, but simply changed
+    the specific set of data we were looking at. In order to maintain consistency, we changed our GOALS
+    document to reflect these changes that we made, and communicated with our team staff mentor. For technical
+    work, we added and familiarized ourselves with the graph class provided by the course staff for Lab_ML
+    and started our project by writing a main.cpp file. We added a means to parse through the data 
+    dilineated by commas in our CSV data files in order to make the data usable for the graph we plan to 
+    construct. In order to make sure this worked, we added some basic test cases that verified that we were
+    reading the right values in the corresponding locations in the vectors created for the data. Finally, 
+    we wrote basic pseudocode for the implementation of the graph itself, as this reflected the goals that 
+    we set for ourselves for the coming up week; we decided that to stay on schedule for the deadlines, we want
+    to finish implementing the graph by the end of week 2, and also complete one of the two algorithms (if not
+    both) that we are supposed to have done by the time of our mid-project meeting.  
