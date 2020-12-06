@@ -17,9 +17,9 @@ class BFS {
         class Iterator : std::iterator<std::forward_iterator_tag, Vertex> {
             public:
                 Iterator();
-                Iterator(ImageTraversal * traversal, PNG & png, Point & start, double & tolerance);
+                Iterator(Vertex & start, Graph graph_trav);
                 Iterator & operator++();
-                Point operator*();
+                Vertex operator*();
                 bool operator!=(const Iterator &other);
 
                 /** @todo [Part 1] */
@@ -35,6 +35,7 @@ class BFS {
                 Vertex currentVertex;
                 Graph g;
         };
+    BFS(Vertex & start, Graph graph_trav);
 
     /**
     * The begining of an iterator
@@ -63,17 +64,17 @@ class BFS {
     * Return but not remove the next point of the traversal
     * 
     */
-    Vertex peek();
+    Vertex peek() const;
 
     /**
     * To see if the traversal has no points left
     * 
     */
-    bool empty();
+    bool empty() const;
     private:
-        GraphCreator gc;
-        Graph g;
-        std::vector<std::vector<std::string>> feat_vec; 
-        std::vector<std::vector<std::string>> edge_vec;
-        queue<Vertex> bfs;
+        Graph g;             //extra graph g???
+        // std::vector<std::vector<std::string>> feat_vec; 
+        // std::vector<std::vector<std::string>> edge_vec;
+        std::queue<Vertex> bfs;
+        Vertex start_vertex;
 }

@@ -9,18 +9,23 @@
 
 #include "BFS.h"
 
-
-BFS::Iterator::Iterator() {
-  trav = NULL;
-  #currentVertex = Vertex(0,0);
+BFS::BFS(Vertex & start, Graph graph_trav){
+  start_vertex = start;
+  g = graph_trav;
+  bfs.push(start_vertex);
 }
 
-BFS::Iterator::Iterator(BFS * traversal, PNG & png, Vertex & start, double & tolerance) {
-  trav = traversal;
+
+BFS::Iterator::Iterator() {
+    //EMPTY
+}
+
+BFS::Iterator::Iterator(Vertex & start, Graph graph_trav) {
   startVertex = start;
+  g = graph_trav;
 
   currentVertex = trav->peek();
-  visitedNodes.resize(image.width(), std::vector<bool>(image.height())); 
+  //ADD VISISTED NOTES
 }
 
 /**
@@ -29,6 +34,10 @@ BFS::Iterator::Iterator(BFS * traversal, PNG & png, Vertex & start, double & tol
  * Advances the traversal of the image.
  */
 BFS::Iterator & BFS::Iterator::operator++() {
+  if(trav->empty()){
+    return *this;
+  }
+  for(int i = 0; i < this->)
     // Setup
 // Maintain a queue
 // Maintain a table of vertices with following features:
@@ -72,7 +81,7 @@ BFS::Iterator & BFS::Iterator::operator++() {
  *
  * Accesses the current Point in the BFS.
  */
-Point BFS::Iterator::operator*() {
+Vertex BFS::Iterator::operator*() {
   
   return currentVertex;
 }
@@ -94,17 +103,17 @@ bool BFS::Iterator::operator!=(const BFS::Iterator &other) {
 
 }
 
-ImageTraversal::Iterator BFS::begin() {
+BFS::Iterator BFS::begin() {
   
-  return ImageTraversal::Iterator(this, image, startPoint, tol);
+  return BFS::Iterator(start_vertex, g);
 }
 
 /**
  * Returns an iterator for the traversal one past the end of the traversal.
  */
-ImageTraversal::Iterator BFS::end() {
+BFS::Iterator BFS::end() {
   
-  return ImageTraversal::Iterator();
+  return BFS::Iterator();
 }
 
 /**

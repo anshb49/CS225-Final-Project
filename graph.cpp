@@ -1,9 +1,39 @@
 #include "graph.h"
 
+using namespace std;
+#include <map>
+#include <queue>
+
 const Vertex Graph::InvalidVertex = "_CS225INVALIDVERTEX";
 const int Graph::InvalidWeight = INT_MIN;
 const string Graph:: InvalidLabel = "_CS225INVALIDLABEL";
 const Edge Graph::InvalidEdge = Edge(Graph::InvalidVertex, Graph::InvalidVertex, Graph::InvalidWeight, Graph::InvalidLabel);
+
+
+void Graph::BFS(Vertex starting_vertex){
+    Vertex current_vertex = starting_vertex;        //cur vertex tracks vertex that is being processed      starting vertex or NULL?????
+    int num_vertices = this->getVertices().size();
+    std::map <Vertex, bool> visited_nodes;         //map that assigns boolean value to vertex to determine if it has been visited
+    std::queue <Vertex> ref_queue;                //queue of references to vertices (queue used because of BFS implementation)
+    ref_queue.push(starting_vertex);
+    visited_nodes[starting_vertex] = true;
+
+    //while loop used to iterate through and process each vertex in queue, while also identifying adjacent vertices
+    //after iterating through adjacent vertices, determine which vertex to visit based on boolean value in map
+    while(!ref_queue.empty()){
+        current_vertex = ref_queue.front();
+        //ADD PROCESS
+        ref_queue.pop();
+        for(Vertex i : this->getAdjacent(current_vertex)){
+            if(!visited_nodes[i]){
+                ref_queue.push(i);
+                visited_nodes[i] = true;
+            }
+        }
+    }
+}
+
+/* --------------------------------------CS225 Graph Class Follows---------------------------------------------------*/
 
 Graph::Graph(bool weighted) : weighted(weighted),directed(false),random(Random(0))
 {

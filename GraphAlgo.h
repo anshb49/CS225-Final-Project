@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <map>
 
 #include "graph.h"
 #include "edge.h"
@@ -21,13 +22,16 @@ using namespace std;
 class GraphAlgo {
 public:
 
-    GraphAlgo(GraphCreator G);
+    GraphAlgo(Graph G);
+    int DijkstraAlgo(Graph g, Vertex source, Vertex destination);
+
 
     private:
         GraphCreator gc;
         queue<Vertex> bfsTrav;
-        map<Vertex> visitedNodes;
+        std::map<Vertex> visitedNodes;
         Vertex startingVertex_;
+        Graph g;
 
 
 };

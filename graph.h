@@ -37,6 +37,16 @@ using std::unordered_map;
 class Graph
 {
 public:
+
+    /**
+     * Implenetation of the BFS traversal algorithim, used to process nodes from a 
+     * chosen starting vertex
+     * @param starting_vertex - start point on our graph
+     */
+    void BFS(Vertex starting_vertex);
+
+/* --------------------------------------CS225 Graph Class Follows---------------------------------------------------*/
+
     /**
      * Constructor to create an empty graph.
      * @param weighted - specifies whether the graph is a weighted graph or

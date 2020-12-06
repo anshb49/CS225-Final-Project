@@ -55,7 +55,7 @@ GraphCreator::GraphCreator(std::vector<std::vector<std::string>> feat_vec, std::
         string to_edge = currentedges_vec[i].at(1);
 
         g_.insertEdge(from_edge, to_edge);
-        g_.setEdgeWeight(from_edge, to_edge, stoi(graph_map[to_edge].at(3)));
+        g_.setEdgeWeight(from_edge, to_edge, stoi(graph_map[to_edge].at(3)));   //set edge weight to views
     }
 
     /*
