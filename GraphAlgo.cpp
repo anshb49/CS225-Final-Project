@@ -1,5 +1,5 @@
 /**
-Algorithms.cpp
+GraphAlgo.cpp
 */
 
 #include "GraphAlgo.h"

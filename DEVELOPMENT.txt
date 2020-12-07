@@ -19,3 +19,22 @@ Week 1: 11/16 - 11/30
     we set for ourselves for the coming up week; we decided that to stay on schedule for the deadlines, we want
     to finish implementing the graph by the end of week 2, and also complete one of the two algorithms (if not
     both) that we are supposed to have done by the time of our mid-project meeting.  
+
+Week 2: 11/30 - 12/7
+    During this second week, as a group we accomplished a lot more of the technical coding parts of the project.
+    One of the first tasks we decided to accomplish was the implementation of our graph itself. We did this by
+    writing a GraphCreator class, which we then utilized to make the graph itself. At the time, we did 
+    this as we felt it to be a good starting point and were not sure what else we could do, but this ended up being
+    very important as a foundational piece to our project, as we would end up using these functions in other files
+    that we went on to write. The second thing we did is perfect our file parsing, as we tested this a bit more
+    thoroughly than we did last week to make sure our graph would properly work. Going into the weekend, we 
+    went ahead and had our midpoint meeting with our mentor, and utilized this to not only update our mentor about
+    what work we had done so far but also as an opportunity to check our pace and make sure that we were working at 
+    an appropriate speed (in terms of the amount of work we had finished up to this point versus what our mentor felt
+    should be done). The remainder of the weekend we spent working on implementing our BFS algorithim. This took us
+    longer than expected, as at first we tried to implement our own iterator and do the BFS in a way similar to how it
+    was done in MP Traversals. However, after some time we realized that we were making it much more complicated than 
+    it needed to be, and so we adjusted by moving the function to where the graph implementation was and invoking
+    it there, based on an implementation provided in the CS 225 Resources page on the website. Going into the third week, 
+    we have started the Dijkstra implementation, and aim to finish both that and PageRank by Tuesday so that we can thoroughly
+    test what we have done and work on the presentation aspect of the project on the last two days.   

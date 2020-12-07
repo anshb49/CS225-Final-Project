@@ -1,5 +1,5 @@
 /**
- * @file Algorithms.h
+ * @file GraphAlgo.h
  * CS 225: Data Structures
  */
 
