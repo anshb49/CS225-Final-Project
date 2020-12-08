@@ -14,6 +14,8 @@
 class GraphCreator {
 public:
 
+  GraphCreator();
+
   GraphCreator(std::vector<std::vector<std::string>> feat_vec, std::vector<std::vector<std::string>> edge_vec);
 
   /**

@@ -33,8 +33,8 @@ $(EXENAME): output_msg $(OBJS)
 readFromFile.o: main.cpp parser.cpp
 	$(CXX) $(CXXFLAGS) main.cpp readFromFile.cpp
 
-test: output_msg catch/catchmain.cpp tests/tests.cpp parser.cpp
-	$(LD) catch/catchmain.cpp tests/tests.cpp parser.cpp $(LDFLAGS) -o test
+test: output_msg cs225/catch/catchmain.cpp tests/tests.cpp parser.cpp
+	$(LD) cs225/catch/catchmain.cpp tests/tests.cpp parser.cpp $(LDFLAGS) -o test
 
 clean:
 	-rm -f *.o $(EXENAME) test

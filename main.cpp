@@ -12,55 +12,24 @@ int main(int argc, const char * argv[]) {
 	
 	// convert file to vector representation
 
-	std::vector<std::vector<std::string>> data_vector;
+	
 
 	std::cout << "Vector Representation:" << std::endl;
 	std::string fileTarget = argv[1];
 
-	std::vector<std::string> vectorRepr = file_to_vector("musae_"+fileTarget+"_target.csv");
+	//std::vector<std::string> vectorRepr = file_to_vector("musae_"+fileTarget+"_target.csv");
+
+	std::vector<std::vector<std::string>> data_vector = file_to_data("musae_"+fileTarget+"_target.csv"); //MAYBE USE PARSER::?
+
+	std::cout<<data_vector[15].at(5) << std::endl; // testcase
+	std::cout<<data_vector[34].at(5)<< std::endl;// testcase
+	std::cout<<data_vector[89].at(5)<< std::endl;// testcase
 	
-	for (auto word : vectorRepr) {
-		int rowCount = 0;
-		int stringCount = 0;
-		std::stringstream s_stream(word);
-
-		std::vector<std::string> row;
-		while (s_stream.good()) {
-			/* code */
-			std::string temp;
-			getline(s_stream, temp, ',');
-			row.push_back(temp);
-			stringCount++;
-		}
-		data_vector.push_back(row);
-	}
-
-	//std::cout<<data_vector[15].at(5) << std::endl; // testcase
-	//std::cout<<data_vector[34].at(5)<< std::endl;// testcase
-	//std::cout<<data_vector[89].at(5)<< std::endl;// testcase
-
-
-	std::vector<std::vector<std::string>> edgesVec;
-	std::vector<std::string> edgesRepr = file_to_vector("musae_"+fileTarget+"_edges.csv");
-
-	for (auto word : edgesRepr) {
-		int rowCount = 0;
-		int stringCount = 0;
-		std::stringstream s_stream(word);
-
-		std::vector<std::string> row;
-		while (s_stream.good()) {
-			/* code */
-			std::string temp;
-			getline(s_stream, temp, ',');
-			row.push_back(temp);
-			stringCount++;
-		}
-		edgesVec.push_back(row);
-	}	
-
+	std::vector<std::vector<std::string>> edgesVec = file_to_edges("musae_"+fileTarget+"_edges.csv"); //MAYBE USE PARSER::?;
 	std::cout<<edgesVec[1].at(0)<< std::endl;// testcase
 	std::cout<<edgesVec[1].at(1)<< std::endl;// testcase
+	
+	
 
 	//Psuedocode for Graph
 	//Parse through edges file to create 2d matrix using similar code from above

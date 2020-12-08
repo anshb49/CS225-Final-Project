@@ -23,15 +23,17 @@ class GraphAlgo {
 public:
 
     GraphAlgo(Graph G);
-    int DijkstraAlgo(Graph g, Vertex source, Vertex destination);
+    tuple<vector<Vertex>, int> DijkstraAlgo(Graph g, Vertex source, Vertex destination);
 
 
     private:
         GraphCreator gc;
         queue<Vertex> bfsTrav;
-        std::map<Vertex> visitedNodes;
+        std::map<Vertex, bool> visitedNodes;
         Vertex startingVertex_;
         Graph g;
+
+        
 
 
 };
