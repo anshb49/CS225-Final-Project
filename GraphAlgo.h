@@ -11,9 +11,9 @@
 #include <map>
 
 #include "graph.h"
-#include "edge.h"
+//#include "edge.h"
 #include "GraphCreator.h"
-#include "BFS.h"
+// #include "BFS.h"
 
 #include <queue>
 
@@ -24,6 +24,7 @@ public:
 
     GraphAlgo(Graph G);
     tuple<vector<Vertex>, int> DijkstraAlgo(Graph g, Vertex source, Vertex destination);
+    vector<Vertex> A_Star(Graph g, Vertex source, Vertex destination);
 
 
     private:

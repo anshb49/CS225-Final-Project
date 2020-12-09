@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include "parser.h"
+#include "GraphAlgo.h"
+#include "GraphCreator.h"
 
 
 int main(int argc, const char * argv[]) {
@@ -29,7 +31,8 @@ int main(int argc, const char * argv[]) {
 	std::cout<<edgesVec[1].at(0)<< std::endl;// testcase
 	std::cout<<edgesVec[1].at(1)<< std::endl;// testcase
 	
-	
+	GraphCreator gc(data_vector, edgesVec);
+	//Graph &g = gc.getGraph();
 
 	//Psuedocode for Graph
 	//Parse through edges file to create 2d matrix using similar code from above
