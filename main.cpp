@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
 #include "parser.h"
-#include "GraphAlgo.h"
-#include "GraphCreator.h"
+//#include "GraphAlgo.h"
+//#include "graphcreator.h"
+#include "interpretgraph.h"
 
 
 int main(int argc, const char * argv[]) {
@@ -23,15 +24,24 @@ int main(int argc, const char * argv[]) {
 
 	std::vector<std::vector<std::string>> data_vector = file_to_data("musae_"+fileTarget+"_target.csv"); //MAYBE USE PARSER::?
 
-	std::cout<<data_vector[15].at(5) << std::endl; // testcase
-	std::cout<<data_vector[34].at(5)<< std::endl;// testcase
-	std::cout<<data_vector[89].at(5)<< std::endl;// testcase
+	// std::cout<<data_vector[15].at(5) << std::endl; // testcase
+	// std::cout<<data_vector[34].at(5)<< std::endl;// testcase
+	// std::cout<<data_vector[89].at(5)<< std::endl;// testcase
 	
 	std::vector<std::vector<std::string>> edgesVec = file_to_edges("musae_"+fileTarget+"_edges.csv"); //MAYBE USE PARSER::?;
-	std::cout<<edgesVec[1].at(0)<< std::endl;// testcase
-	std::cout<<edgesVec[1].at(1)<< std::endl;// testcase
+	// std::cout<<edgesVec[1].at(0)<< std::endl;// testcase
+	// std::cout<<edgesVec[1].at(1)<< std::endl;// testcase
 	
-	GraphCreator gc(data_vector, edgesVec);
+	GraphInitializer gc(data_vector, edgesVec);
+	Graph testGraph = gc.getGraph();
+
+	//GraphAlgo ga(testGraph);
+	vector<int> BFS_output = testGraph.BFS(testGraph.getVertices().at(0), gc.getFeaturesMap()); //Create Presenation for BFS output
+	for (int i = 0; i < (int)BFS_output.size(); i++) {
+		std::cout << BFS_output[i] << std::endl;
+	}
+	//GraphCreator gc(data_vector, edgesVec);
+	//GraphCreator gc = GraphCreator(data_vector, edgesVec);
 	//Graph &g = gc.getGraph();
 
 	//Psuedocode for Graph

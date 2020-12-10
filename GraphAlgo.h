@@ -12,7 +12,7 @@
 
 #include "graph.h"
 //#include "edge.h"
-#include "GraphCreator.h"
+#include "interpretgraph.h"
 // #include "BFS.h"
 
 #include <queue>
@@ -25,10 +25,12 @@ public:
     GraphAlgo(Graph G);
     tuple<vector<Vertex>, int> DijkstraAlgo(Graph g, Vertex source, Vertex destination);
     vector<Vertex> A_Star(Graph g, Vertex source, Vertex destination);
+    int heuristic_fcn(Vertex start, Vertex dest);
+    
 
 
     private:
-        GraphCreator gc;
+        //GraphInitializer gc;
         queue<Vertex> bfsTrav;
         std::map<Vertex, bool> visitedNodes;
         Vertex startingVertex_;

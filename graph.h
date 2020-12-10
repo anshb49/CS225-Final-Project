@@ -1,3 +1,23 @@
+/**
+ * @file graph.h
+ * Graph Library Declarations
+ *
+ * Written for CS 225 Spring 2011
+ * @author Sean Massung
+ *
+ * Updated Spring 2012 by Sean Massung
+ *  - Added doxygen comments
+ *  - Created better error handling
+ *  - More encapsulated and object-oriented
+ * 
+ *  Updated Spring 2018 by Jordi
+ *  - Added doxygen comments
+ *  - Created better error handling
+ *  - More encapsulated and object-oriented
+ *
+ * Update Spring 18 by Simeng
+ * - Finishing adding all required features
+ */
 #pragma once
 
 #include <list>
@@ -13,6 +33,9 @@
 #include <set>
 #include <sstream>
 #include <vector>
+
+#include <map>
+#include <queue>
 
 #include "edge.h"
 #include "random.h"
@@ -37,24 +60,22 @@ using std::unordered_map;
 class Graph
 {
 public:
-
     /**
      * Implenetation of the BFS traversal algorithim, used to process nodes from a 
      * chosen starting vertex
      * @param starting_vertex - start point on our graph
      */
-    void BFS(Vertex starting_vertex);
+    //void BFS(Vertex starting_vertex);
+    vector<int> BFS(Vertex starting_vertex, std::map<string, std::vector<string>> feat_map);
 
-/* --------------------------------------CS225 Graph Class Follows---------------------------------------------------*/
 
+    Graph();
     /**
      * Constructor to create an empty graph.
      * @param weighted - specifies whether the graph is a weighted graph or
      *  not
      */
     Graph(bool weighted);
-
-    Graph();
 
     /**
      * Constructor to create an empty graph.

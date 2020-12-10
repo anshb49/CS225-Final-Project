@@ -1,3 +1,13 @@
+/**
+ * @file random.h
+ * Random library declarations.
+ * Originally written for use with the Graph class to generate random
+ *  graphs and integers.
+ *
+ * @author Sean Massung
+ * @date Spring 2011
+ */
+
 #pragma once
 
 #include <vector>
@@ -11,6 +21,7 @@ using std::vector;
 class Random
 {
   public:
+    inline Random();
     /**
      * Constructor.
      * @param seed - seed to initialize the RNG
@@ -38,4 +49,4 @@ class Random
     inline bool LFSR();
 };
 
-//#include "random.cpp"
+#include "random.cpp"

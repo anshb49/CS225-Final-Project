@@ -3,12 +3,12 @@
  */
 
 #pragma once
-
+#include <iostream>
 #include <vector>
 #include <algorithm>
 
 #include "graph.h"
-//#include "edge.h"
+#include "edge.h"
 
 
 class GraphCreator {
@@ -22,7 +22,7 @@ public:
    * Label the edges as "WIN" or "LOSE" based on a threshold.
    */
   //Do we need this??
-  void labelEdgesFromThreshold(int threshold);
+  //void labelEdgesFromThreshold(int threshold);
 
   /**
    * Returns a constant reference to the state space graph.

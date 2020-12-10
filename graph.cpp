@@ -1,16 +1,13 @@
 #include "graph.h"
 
-using namespace std;
-#include <map>
-#include <queue>
-
 const Vertex Graph::InvalidVertex = "_CS225INVALIDVERTEX";
 const int Graph::InvalidWeight = INT_MIN;
 const string Graph:: InvalidLabel = "_CS225INVALIDLABEL";
 const Edge Graph::InvalidEdge = Edge(Graph::InvalidVertex, Graph::InvalidVertex, Graph::InvalidWeight, Graph::InvalidLabel);
+Graph::Graph() : weighted(true), directed(false){
+}
 
-
-void Graph::BFS(Vertex starting_vertex){
+vector<int> Graph::BFS(Vertex starting_vertex, std::map<string, std::vector<string>> feat_map){
     Vertex current_vertex = starting_vertex;        //cur vertex tracks vertex that is being processed      starting vertex or NULL?????
     int num_vertices = this->getVertices().size();
     std::map <Vertex, bool> visited_nodes;         //map that assigns boolean value to vertex to determine if it has been visited
@@ -18,11 +15,38 @@ void Graph::BFS(Vertex starting_vertex){
     ref_queue.push(starting_vertex);
     visited_nodes[starting_vertex] = true;
 
+    int bin1 = 0;
+    int bin2 = 0;
+    int bin3 = 0;
+    int bin4 = 0;
+    int bin5 = 0;
+    int total = 0;
+
     //while loop used to iterate through and process each vertex in queue, while also identifying adjacent vertices
     //after iterating through adjacent vertices, determine which vertex to visit based on boolean value in map
+
     while(!ref_queue.empty()){
         current_vertex = ref_queue.front();
+        total++;
         //ADD PROCESS
+        std::string bfs_output = "ID: " + feat_map[current_vertex].at(0) + " Days: " + feat_map[current_vertex].at(1) + " Mature: " + feat_map[current_vertex].at(2) + " Views: " +feat_map[current_vertex].at(3) + " Partner: " + feat_map[current_vertex].at(4) + " New ID: " + feat_map[current_vertex].at(5); 
+        std::cout << bfs_output << std::endl;
+
+        int views = stoi(feat_map[current_vertex].at(3));
+        std::cout << views << std::endl;
+        if (views < 1000) {
+            bin1++;
+        } else if (views < 10000) {
+            bin2++;
+        } else if (views < 50000) {
+            bin3++;
+        } else if (views < 100000) {
+            bin4++;
+        } else {
+            bin5++;
+        }
+
+
         ref_queue.pop();
         for(Vertex i : this->getAdjacent(current_vertex)){
             if(!visited_nodes[i]){
@@ -31,9 +55,18 @@ void Graph::BFS(Vertex starting_vertex){
             }
         }
     }
+
+    vector<int> output_vector;
+    output_vector.push_back(bin1);
+    output_vector.push_back(bin2);
+    output_vector.push_back(bin3);
+    output_vector.push_back(bin4);
+    output_vector.push_back(bin5);
+    output_vector.push_back(total);
+    return output_vector;
+    
 }
 
-/* --------------------------------------CS225 Graph Class Follows---------------------------------------------------*/
 
 Graph::Graph(bool weighted) : weighted(weighted),directed(false),random(Random(0))
 {

@@ -1,15 +1,13 @@
 /**
- * @file GraphCreator.cpp
+ * @file NimLearner.cpp
+ * CS 225: Data Structures
  */
 
-#include "graphcreator.h"
+#include "interpretgraph.h"
 #include <ctime>
-#include <map>
-
-using namespace std;
 
 
-GraphCreator::GraphCreator(std::vector<std::vector<std::string>> feat_vec, std::vector<std::vector<std::string>> edge_vec) : g_(true, true) {
+GraphInitializer::GraphInitializer(std::vector<std::vector<std::string>> feat_vec, std::vector<std::vector<std::string>> edge_vec) : g_(true, true) {
     /* Your code goes here! */
 
     currentfeatures_vec = feat_vec;
@@ -40,31 +38,24 @@ GraphCreator::GraphCreator(std::vector<std::vector<std::string>> feat_vec, std::
         g_.insertEdge(from_edge, to_edge);
         g_.setEdgeWeight(from_edge, to_edge, stoi(graph_map[to_edge].at(3)));   //set edge weight to views
     } 
+
+    featuresMAP = graph_map;
   }
 
 
-/**
- * Label the edges as "WIN" or "LOSE" based on a threshold.
- */
-/*
-void NimLearner::labelEdgesFromThreshold(int threshold) {
-  for (const Vertex & v : g_.getVertices()) {
-    for (const Vertex & w : g_.getAdjacent(v)) {
-      int weight = g_.getEdgeWeight(v, w);
 
-      // Label all edges with positve weights as "WINPATH"
-      if (weight > threshold)           { g_.setEdgeLabel(v, w, "WIN"); }
-      else if (weight < -1 * threshold) { g_.setEdgeLabel(v, w, "LOSE"); }
-    }
-  }
-}
-*/
+
 
 /**
  * Returns a constant reference to the state space graph.
  *
  * @returns A constant reference to the state space graph.
  */
-const Graph & GraphCreator::getGraph() const {
+const Graph & GraphInitializer::getGraph() const {
   return g_;
+}
+
+
+const std::map<string, std::vector<string>> & GraphInitializer::getFeaturesMap() const {
+  return featuresMAP;
 }
