@@ -41,7 +41,7 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
     //std::cout << __LINE__ << std::endl;
     p_queue.push(g.getVertices().at(i));
   }
-  std::cout << __LINE__ << std::endl;
+  //std::cout << __LINE__ << std::endl;
   Vertex current_node;
   Vertex last_node = current_node;
   while (p_queue.empty() == false) {
@@ -53,10 +53,13 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
     std::cout << "current_node: "<< current_node << std::endl;
     //std::cout << "size: " << g.getAdjacent(current_node).size() << std::endl;
     
+    if (current_node == destination) {
+      break;
+    }
     for (Vertex v : g.getAdjacent(current_node)) {
       Edge e;
-      std::cout << __LINE__ << std::endl;
-      std::cout << v << std::endl;
+      //std::cout << __LINE__ << std::endl;
+      //std::cout << v << std::endl;
       if (g.edgeExists(current_node, v)) {
         e = g.getEdge(current_node, v);
       } else {
@@ -64,24 +67,24 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
       }
       
       int cost = e.getWeight();
-      std::cout << "cost: " << cost << std::endl;
+      //std::cout << "cost: " << cost << std::endl;
       if (cost + distance_djikstra[current_node] < distance_djikstra[v]) {
         //std::cout << __LINE__ << std::endl;
         distance_djikstra[v] = cost + distance_djikstra[current_node];
         previous_node[v] = current_node;
         //std::cout << v << " " << current_node << "here" << std::endl;
       }
-      std::cout << __LINE__ << std::endl;
-      last_node = v;
+      //std::cout << __LINE__ << std::endl;
     }
 
-    std::cout << "empty> : " << p_queue.empty() << std::endl;
+    //std::cout << "empty> : " << p_queue.empty() << std::endl;
   }
   vector<Vertex> path;
   int distance = distance_djikstra[last_node];
-  std::cout << previous_node[last_node] << " "<< source<< std::endl;
-  std::cout << "distance: " << distance << std::endl;
+  //std::cout << previous_node[last_node] << " "<< source<< std::endl;
+  //std::cout << "distance: " << distance << std::endl;
   //int count = 0;
+  last_node = current_node;
   while (last_node != source && last_node != "") {
     /* code */
     //std::cout << __LINE__ << std::endl;
