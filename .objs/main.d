@@ -1,9 +1,9 @@
-.objs/main.o: main.cpp parser.h interpretgraph.h graph.h edge.h random.h \
-  random.cpp
+.objs/main.o: main.cpp parser.h GraphAlgo.h graph.h edge.h random.h \
+  random.cpp interpretgraph.h
 
 parser.h:
 
-interpretgraph.h:
+GraphAlgo.h:
 
 graph.h:
 
@@ -12,3 +12,5 @@ edge.h:
 random.h:
 
 random.cpp:
+
+interpretgraph.h:

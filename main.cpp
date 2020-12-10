@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "parser.h"
-//#include "GraphAlgo.h"
+#include "GraphAlgo.h"
 //#include "graphcreator.h"
 #include "interpretgraph.h"
 
@@ -35,11 +35,15 @@ int main(int argc, const char * argv[]) {
 	GraphInitializer gc(data_vector, edgesVec);
 	Graph testGraph = gc.getGraph();
 
-	//GraphAlgo ga(testGraph);
+	
 	vector<int> BFS_output = testGraph.BFS(testGraph.getVertices().at(0), gc.getFeaturesMap()); //Create Presenation for BFS output
 	for (int i = 0; i < (int)BFS_output.size(); i++) {
 		std::cout << BFS_output[i] << std::endl;
 	}
+
+	GraphAlgo ga(testGraph);
+	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(testGraph, testGraph.getStartingVertex(), testGraph.getVertices().at(50));
+	std::cout << "Djikstra: " << get<1>(djikstra_output) << std::endl;
 	//GraphCreator gc(data_vector, edgesVec);
 	//GraphCreator gc = GraphCreator(data_vector, edgesVec);
 	//Graph &g = gc.getGraph();

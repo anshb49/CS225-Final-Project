@@ -37,42 +37,55 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
   distance_djikstra[source] = 0;
   
   priority_queue<Vertex> p_queue;
-  for (int i = 0; i < (int)g.getVertices().size(); i++) {
+  for (int i = 0; i < 5/*(int)g.getVertices().size()*/ ; i++) {
+    std::cout << __LINE__ << std::endl;
     p_queue.push(g.getVertices().at(i));
   }
-
+  std::cout << __LINE__ << std::endl;
   Vertex current_node;
   while (p_queue.empty() == false) {
+    std::cout << __LINE__ << std::endl;
     current_node = p_queue.top();
     p_queue.pop();
 
+    std::cout << __LINE__ << std::endl;
+    std::cout << current_node << std::endl;
+    std::cout << "size: " << g.getAdjacent(current_node).size() << std::endl;
+    
     for (Vertex v : g.getAdjacent(current_node)) {
       Edge e;
+      std::cout << current_node << std::endl;
       if (g.edgeExists(current_node, v)) {
         e = g.getEdge(current_node, v);
       } else {
         e = g.getEdge(v, current_node);
       }
-
+      
       int cost = e.getWeight();
       if (cost + distance_djikstra[current_node] < distance_djikstra[v]) {
+        std::cout << __LINE__ << std::endl;
         distance_djikstra[v] = cost + distance_djikstra[current_node];
         previous_node[v] = current_node;
       }
+      std::cout << __LINE__ << std::endl;
     }
-  
+
+    std::cout << "empty> : " << p_queue.empty() << std::endl;
   }
 
+  std::cout << __LINE__ << std::endl;
   vector<Vertex> path;
   Vertex last_node = current_node;
   int distance = distance_djikstra[last_node];
-  while (last_node != source) {
+  while (last_node != source || last_node != "") {
     /* code */
+    std::cout << __LINE__ << std::endl;
     Vertex p = previous_node[last_node];
     path.push_back(p);
+    std::cout << previous_node[last_node] << std::endl;
     //distance +=
   }
-
+  std::cout << __LINE__ << std::endl;
   tuple<vector<Vertex>, int> output_vals = make_tuple(path, distance);
   return output_vals;
 }
