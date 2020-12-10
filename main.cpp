@@ -35,14 +35,16 @@ int main(int argc, const char * argv[]) {
 	GraphInitializer gc(data_vector, edgesVec);
 	Graph testGraph = gc.getGraph();
 
-	
-	vector<int> BFS_output = testGraph.BFS(testGraph.getVertices().at(0), gc.getFeaturesMap()); //Create Presenation for BFS output
+	std::map<string, std::vector<string>> feat_map = gc.getFeaturesMap();
+	vector<int> BFS_output = testGraph.BFS(testGraph.getVertices().at(0), feat_map); //Create Presenation for BFS output
 	for (int i = 0; i < (int)BFS_output.size(); i++) {
 		std::cout << BFS_output[i] << std::endl;
 	}
 
 	GraphAlgo ga(testGraph);
 	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(testGraph, testGraph.getStartingVertex(), testGraph.getVertices().at(50));
+	std::cout << "Djikstra Source: " << feat_map[testGraph.getStartingVertex()].at(5) << std::endl;
+	std::cout << "Djikstra Destination: " << feat_map[testGraph.getVertices().at(50)].at(5) << std::endl;
 	std::cout << "Djikstra: " << get<1>(djikstra_output) << std::endl;
 	//GraphCreator gc(data_vector, edgesVec);
 	//GraphCreator gc = GraphCreator(data_vector, edgesVec);

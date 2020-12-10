@@ -37,21 +37,21 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
   distance_djikstra[source] = 0;
   
   priority_queue<Vertex> p_queue;
-  for (int i = 0; i < 5/*(int)g.getVertices().size()*/ ; i++) {
-    std::cout << __LINE__ << std::endl;
+  for (int i = 0; i < (int)g.getVertices().size() ; i++) {
+    //std::cout << __LINE__ << std::endl;
     p_queue.push(g.getVertices().at(i));
   }
   std::cout << __LINE__ << std::endl;
   Vertex current_node;
   Vertex last_node = current_node;
   while (p_queue.empty() == false) {
-    std::cout << __LINE__ << std::endl;
+    //std::cout << __LINE__ << std::endl;
     current_node = p_queue.top();
     p_queue.pop();
 
-    std::cout << __LINE__ << std::endl;
-    std::cout << current_node << std::endl;
-    std::cout << "size: " << g.getAdjacent(current_node).size() << std::endl;
+    //std::cout << __LINE__ << std::endl;
+    std::cout << "current_node: "<< current_node << std::endl;
+    //std::cout << "size: " << g.getAdjacent(current_node).size() << std::endl;
     
     for (Vertex v : g.getAdjacent(current_node)) {
       Edge e;
@@ -64,11 +64,12 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
       }
       
       int cost = e.getWeight();
+      std::cout << "cost: " << cost << std::endl;
       if (cost + distance_djikstra[current_node] < distance_djikstra[v]) {
-        std::cout << __LINE__ << std::endl;
+        //std::cout << __LINE__ << std::endl;
         distance_djikstra[v] = cost + distance_djikstra[current_node];
         previous_node[v] = current_node;
-        std::cout << v << " " << current_node << "here" << std::endl;
+        //std::cout << v << " " << current_node << "here" << std::endl;
       }
       std::cout << __LINE__ << std::endl;
       last_node = v;
@@ -76,21 +77,22 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
 
     std::cout << "empty> : " << p_queue.empty() << std::endl;
   }
-  std::cout << __LINE__ << std::endl;
-  std::cout << last_node << std::endl;
-  std::cout << previous_node[last_node] << " "<< source<< std::endl;
   vector<Vertex> path;
   int distance = distance_djikstra[last_node];
-  while (last_node != source || last_node != "") {
+  std::cout << previous_node[last_node] << " "<< source<< std::endl;
+  std::cout << "distance: " << distance << std::endl;
+  //int count = 0;
+  while (last_node != source && last_node != "") {
     /* code */
     //std::cout << __LINE__ << std::endl;
     Vertex p = previous_node[last_node];
-    std::cout<< "Reached here" << previous_node[last_node] << source<< std::endl;
+    //std::cout<< "Reached here" << previous_node[last_node] << std::endl;
     path.push_back(p);
     last_node = p;
     //distance +=
+    //count++;
   }
-  std::cout << __LINE__ << std::endl;
+  //std::cout << __LINE__ << std::endl;
   tuple<vector<Vertex>, int> output_vals = make_tuple(path, distance);
   return output_vals;
 }
