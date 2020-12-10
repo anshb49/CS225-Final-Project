@@ -32,7 +32,7 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
 
   for (Vertex v : g.getVertices()) {
     distance_djikstra[v] = INT_MAX; //infinite;
-    previous_node[v] = "";
+    previous_node[v] = "test";
   }
   distance_djikstra[source] = 0;
   
@@ -43,6 +43,7 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
   }
   std::cout << __LINE__ << std::endl;
   Vertex current_node;
+  Vertex last_node = current_node;
   while (p_queue.empty() == false) {
     std::cout << __LINE__ << std::endl;
     current_node = p_queue.top();
@@ -54,7 +55,8 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
     
     for (Vertex v : g.getAdjacent(current_node)) {
       Edge e;
-      std::cout << current_node << std::endl;
+      std::cout << __LINE__ << std::endl;
+      std::cout << v << std::endl;
       if (g.edgeExists(current_node, v)) {
         e = g.getEdge(current_node, v);
       } else {
@@ -66,23 +68,26 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
         std::cout << __LINE__ << std::endl;
         distance_djikstra[v] = cost + distance_djikstra[current_node];
         previous_node[v] = current_node;
+        std::cout << v << " " << current_node << "here" << std::endl;
       }
       std::cout << __LINE__ << std::endl;
+      last_node = v;
     }
 
     std::cout << "empty> : " << p_queue.empty() << std::endl;
   }
-
   std::cout << __LINE__ << std::endl;
+  std::cout << last_node << std::endl;
+  std::cout << previous_node[last_node] << " "<< source<< std::endl;
   vector<Vertex> path;
-  Vertex last_node = current_node;
   int distance = distance_djikstra[last_node];
   while (last_node != source || last_node != "") {
     /* code */
-    std::cout << __LINE__ << std::endl;
+    //std::cout << __LINE__ << std::endl;
     Vertex p = previous_node[last_node];
+    std::cout<< "Reached here" << previous_node[last_node] << source<< std::endl;
     path.push_back(p);
-    std::cout << previous_node[last_node] << std::endl;
+    last_node = p;
     //distance +=
   }
   std::cout << __LINE__ << std::endl;
