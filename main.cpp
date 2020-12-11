@@ -46,6 +46,11 @@ int main(int argc, const char * argv[]) {
 	std::cout << "Djikstra Source: " << feat_map[testGraph.getStartingVertex()].at(5) << std::endl;
 	std::cout << "Djikstra Destination: " << feat_map[testGraph.getVertices().at(50)].at(5) << std::endl;
 	std::cout << "Djikstra: " << get<1>(djikstra_output) << std::endl;
+	vector<Vertex> pathway = get<0>(djikstra_output);
+	reverse(pathway.begin(), pathway.end());
+	for (Vertex v: pathway) {
+		cout<< v << " ";
+	}
 	//GraphCreator gc(data_vector, edgesVec);
 	//GraphCreator gc = GraphCreator(data_vector, edgesVec);
 	//Graph &g = gc.getGraph();
