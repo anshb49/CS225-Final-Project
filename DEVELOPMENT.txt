@@ -38,3 +38,23 @@ Week 2: 11/30 - 12/7
     it there, based on an implementation provided in the CS 225 Resources page on the website. Going into the third week, 
     we have started the Dijkstra implementation, and aim to finish both that and PageRank by Tuesday so that we can thoroughly
     test what we have done and work on the presentation aspect of the project on the last two days.   
+
+Week 3: 12/7 - 12/11
+    During the last week, the goal we wanted to accomplish was very simple: finish the coding aspects of the project
+    by Wednesday so we could spend Thursday and Friday working on the presentation aspect of it. This started with
+    finishing up the Dijkstra algorithm, although we encountered some issues with bugs that caused us to spend more
+    time than we would have liked. One large issue we dealt with was a linker error that came up due in our Makefile,
+    preventing us from intensely testing our Dijkstra algorithm. We spent a lot of time trying to match the
+    implementation of our Makefile to others given in class, and eventually what we did to fix it was simply redo
+    the whole Makefile, and make it much shorter than what we had originally (as is the case for the Makefiles for
+    later lab and MP assignments). Another step we had to take to fix the bug was re-implement some parts of our GraphCreator
+    class, which we thought would be easiest to do by replacing it with a new class called "GraphIntializer" in the
+    interpretgraph.h and .cpp files. Other than this issue, the Dijkstra algorithm was not too difficult to implement once
+    we as a group reviewed and understood how to use a priority queue. Taking advantage of this allowed us to follow the
+    pseudocode in the resources page on the course website. Finally, this left us with the complex algorithm, A* search.
+    To complete A*, the big design decision we had to make was selecting a heuristic function. Since the selection of this
+    function could be arbitrary, we decided to keep it simple by just using the number of views that our destination node had,
+    which also happened to be our edge weight. Using this function, the implementation of A* was fairly similar to Dijkstra,
+    so we took advantage of the lessons we learned while implementing that to implement this last algorithm. Afterward, we
+    began formalizing our test cases into a test file to confirm that our algorithms were working as expected. This left us
+    with all of Friday to record our presentation finalize our submission components. 
