@@ -15,14 +15,8 @@ int main(int argc, const char * argv[]) {
 	//std::vector<std::string> vectorRepr = file_to_vector("musae_"+fileTarget+"_target.csv");
 
 	std::vector<std::vector<std::string>> data_vector = file_to_data("musae_"+fileTarget+"_target.csv"); //MAYBE USE PARSER::?
-
-	// std::cout<<data_vector[15].at(5) << std::endl; // testcase
-	// std::cout<<data_vector[34].at(5)<< std::endl;// testcase
-	// std::cout<<data_vector[89].at(5)<< std::endl;// testcase
 	
 	std::vector<std::vector<std::string>> edgesVec = file_to_edges("musae_"+fileTarget+"_edges.csv"); //MAYBE USE PARSER::?;
-	// std::cout<<edgesVec[1].at(0)<< std::endl;// testcase
-	// std::cout<<edgesVec[1].at(1)<< std::endl;// testcase
 	
 	GraphInitializer gc(data_vector, edgesVec);
 	Graph testGraph = gc.getGraph();
@@ -48,6 +42,7 @@ int main(int argc, const char * argv[]) {
 		dijk_data.push_back(feat_map[v]);
 		cout<< v << " ";
 	}
+	cout <<"" <<endl;
 
 	double total_views_dijk = 0;
 	double total_days_dijk = 0;
@@ -69,9 +64,9 @@ int main(int argc, const char * argv[]) {
 	cout << "" << endl;
 	
 
-	vector<Vertex> a_output = ga.A_Star(testGraph, testGraph.getStartingVertex(), testGraph.getVertices().at(40));
+	vector<Vertex> a_output = ga.A_Star(testGraph, testGraph.getStartingVertex(), testGraph.getVertices().at(50));
 	std::cout << "A* Source: " << feat_map[testGraph.getStartingVertex()].at(5) << std::endl;
-	std::cout << "A* Destination: " << feat_map[testGraph.getVertices().at(40)].at(5) << std::endl;
+	std::cout << "A* Destination: " << feat_map[testGraph.getVertices().at(50)].at(5) << std::endl;
 	reverse(a_output.begin(), a_output.end());
 	vector<vector<std::string>> astar_data;
 	cout<< "A* Path: ";

@@ -10,8 +10,6 @@ using namespace std;
 
 
 GraphCreator::GraphCreator(std::vector<std::vector<std::string>> feat_vec, std::vector<std::vector<std::string>> edge_vec) : g_(true, true) {
-    /* Your code goes here! */
-
     currentfeatures_vec = feat_vec;
     currentedges_vec = edge_vec;
 
@@ -43,22 +41,7 @@ GraphCreator::GraphCreator(std::vector<std::vector<std::string>> feat_vec, std::
   }
 
 
-/**
- * Label the edges as "WIN" or "LOSE" based on a threshold.
- */
-/*
-void NimLearner::labelEdgesFromThreshold(int threshold) {
-  for (const Vertex & v : g_.getVertices()) {
-    for (const Vertex & w : g_.getAdjacent(v)) {
-      int weight = g_.getEdgeWeight(v, w);
 
-      // Label all edges with positve weights as "WINPATH"
-      if (weight > threshold)           { g_.setEdgeLabel(v, w, "WIN"); }
-      else if (weight < -1 * threshold) { g_.setEdgeLabel(v, w, "LOSE"); }
-    }
-  }
-}
-*/
 
 /**
  * Returns a constant reference to the state space graph.
