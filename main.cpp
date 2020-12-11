@@ -8,14 +8,6 @@
 
 int main(int argc, const char * argv[]) {
 	std::cout << "Filename: " << argv[1] << std::endl;
-	
-	// convert file to string representation
-	//std::cout << "String Representation:" << std::endl;
-	//std::cout << file_to_string(argv[1]) << std::endl;
-	
-	// convert file to vector representation
-
-	
 
 	//std::cout << "Vector Representation:" << std::endl;
 	std::string fileTarget = argv[1];
@@ -37,14 +29,14 @@ int main(int argc, const char * argv[]) {
 
 	
 	std::map<string, std::vector<string>> feat_map = gc.getFeaturesMap();
-	//vector<int> BFS_output = testGraph.BFS(testGraph.getVertices().at(0), feat_map); //Create Presenation for BFS output
-	//std::cout << printBFSOutput(BFS_output) << std::endl;
+	vector<int> BFS_output = testGraph.BFS(testGraph.getVertices().at(0), feat_map); //Create Presenation for BFS output
+	std::cout << printBFSOutput(BFS_output) << std::endl;
 	
 	
 	GraphAlgo ga(testGraph);
 	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(testGraph, testGraph.getStartingVertex(), testGraph.getVertices().at(40));
 	std::cout << "Dijkstra Source: " << feat_map[testGraph.getStartingVertex()].at(5) << std::endl;
-	std::cout << "Dijkstra Destination: " << feat_map[testGraph.getVertices().at(50)].at(5) << std::endl;
+	std::cout << "Dijkstra Destination: " << feat_map[testGraph.getVertices().at(40)].at(5) << std::endl;
 	std::cout << "Dijkstra: " << get<1>(djikstra_output) << std::endl;
 	vector<Vertex> pathway = get<0>(djikstra_output);
 	reverse(pathway.begin(), pathway.end());
@@ -79,7 +71,7 @@ int main(int argc, const char * argv[]) {
 
 	vector<Vertex> a_output = ga.A_Star(testGraph, testGraph.getStartingVertex(), testGraph.getVertices().at(40));
 	std::cout << "A* Source: " << feat_map[testGraph.getStartingVertex()].at(5) << std::endl;
-	std::cout << "A* Destination: " << feat_map[testGraph.getVertices().at(50)].at(5) << std::endl;
+	std::cout << "A* Destination: " << feat_map[testGraph.getVertices().at(40)].at(5) << std::endl;
 	reverse(a_output.begin(), a_output.end());
 	vector<vector<std::string>> astar_data;
 	cout<< "A* Path: ";

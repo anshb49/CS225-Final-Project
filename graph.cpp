@@ -33,7 +33,6 @@ vector<int> Graph::BFS(Vertex starting_vertex, std::map<string, std::vector<stri
         std::cout << bfs_output << std::endl;
 
         int views = stoi(feat_map[current_vertex].at(3));
-        std::cout << views << std::endl;
         if (views < 1000) {
             bin1++;
         } else if (views < 10000) {
