@@ -36,7 +36,7 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
   }
   distance_djikstra[source] = 0;
   
-  priority_queue<pair<int, Vertex>> p_queue; //pair of distance and Vertex
+  priority_queue<pair<int, Vertex>, vector<pair<int, Vertex>>, std::greater<pair<int, Vertex>>> p_queue; //pair of distance and Vertex
   pair<int, Vertex> p= make_pair(0, source);
   p_queue.push(p);
 
@@ -74,6 +74,11 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
   last_node = current_node;
   int distance = distance_djikstra[last_node];
 
+  if (last_node != destination) {
+    cout << "The chosen destination could not be found. This may be due to the starting and ending nodes being in different connected components" << endl;
+    distance = -1;
+  }
+
   path.push_back(last_node);
   while (last_node != source && last_node != "") {
 
@@ -88,7 +93,7 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
 
 
 vector<Vertex> GraphAlgo::A_Star(Graph g, Vertex source, Vertex destination){
-  priority_queue<pair<int, Vertex>> discovered_nodes; //pair of distance and Vertex
+  priority_queue<pair<int, Vertex>, vector<pair<int, Vertex>>, std::greater<pair<int, Vertex>>> discovered_nodes; //pair of distance and Vertex
   pair<int, Vertex> p= make_pair(0, source);
   discovered_nodes.push(p);
 
@@ -132,6 +137,9 @@ vector<Vertex> GraphAlgo::A_Star(Graph g, Vertex source, Vertex destination){
   vector<Vertex> path;
   Vertex last_node = current_node;
 
+  if (last_node != destination) {
+    cout << "The chosen destination could not be found. This may be due to the starting and ending nodes being in different connected components" << endl;
+  }
   path.push_back(last_node);
   while (last_node != source && last_node != "") {
     Vertex p = previous_node[last_node];

@@ -69,16 +69,15 @@ TEST_CASE("Verify that Dijkstra Algorithm returns Correct Path - Large Sample") 
 	GraphAlgo ga(outputGraph);
 	std::map<string, std::vector<string>> feat_map = gc.getFeaturesMap();
 
-	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(outputGraph, outputGraph.getStartingVertex(), outputGraph.getVertices().at(40));
+	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(outputGraph, outputGraph.getStartingVertex(), outputGraph.getVertices().at(50));
 	reverse((get<0>(djikstra_output)).begin(), (get<0>(djikstra_output)).end());
 
 	vector<std::string> correct_vector;
 	correct_vector.push_back("1991");
-	correct_vector.push_back("681");
-	correct_vector.push_back("4958");
-	correct_vector.push_back("6019");
-	correct_vector.push_back("6147");
-	correct_vector.push_back("6883");
+	correct_vector.push_back("2262");
+	correct_vector.push_back("2275");
+	correct_vector.push_back("3237");
+	correct_vector.push_back("5296");
 
 	REQUIRE(get<0>(djikstra_output).size() == correct_vector.size());
 
@@ -95,7 +94,7 @@ TEST_CASE("Verify that Dijkstra Algorithm returns Correct Distance - Large Sampl
 
 	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(outputGraph, outputGraph.getStartingVertex(), outputGraph.getVertices().at(40));
 
-	REQUIRE(get<1>(djikstra_output) == 563013);
+	REQUIRE(get<1>(djikstra_output) == 208786805);
 }
 
 
@@ -134,8 +133,8 @@ TEST_CASE("Verify that A* Algorithm returns Correct Path - Large Sample") {
 	vector<std::string> correct_vector;
 	correct_vector.push_back("1991");
 	correct_vector.push_back("2262");
-	correct_vector.push_back("2481");
-	correct_vector.push_back("4477");
+	correct_vector.push_back("2275");
+	correct_vector.push_back("3237");
 	correct_vector.push_back("5296");
 
 	REQUIRE(astar_output.size() == correct_vector.size());

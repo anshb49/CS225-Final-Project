@@ -75,7 +75,7 @@ std::vector<std::vector<std::string>>file_to_edges(const std::string & filename)
 std::string printBFSOutput(std::vector<int> inputBins) {
 	std::cout << "" <<std::endl;
 	std::string output_string = "";
-	for (int i = 0; i < (int)inputBins.size(); i++) {
+	for (int i = 0; i < (int)inputBins.size() - 1; i++) {
         if (i < 1) {
 			output_string = output_string + "0 - 1000 Views: " + std::to_string(inputBins[i]) + " || ";
 
@@ -94,6 +94,8 @@ std::string printBFSOutput(std::vector<int> inputBins) {
         }
 		//std::cout << BFS_output[i] << std::endl;
 	}
+
+	output_string = output_string + " Total Vertices: " + std::to_string(inputBins[(int)inputBins.size() - 1]) + " || ";
 	return output_string;
 
 }

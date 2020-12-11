@@ -28,9 +28,9 @@ int main(int argc, const char * argv[]) {
 	
 	
 	GraphAlgo ga(testGraph);
-	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(testGraph, testGraph.getStartingVertex(), testGraph.getVertices().at(40));
 	std::cout << "Dijkstra Source: " << feat_map[testGraph.getStartingVertex()].at(5) << std::endl;
-	std::cout << "Dijkstra Destination: " << feat_map[testGraph.getVertices().at(40)].at(5) << std::endl;
+	std::cout << "Dijkstra Destination: " << feat_map[testGraph.getVertices().at(50)].at(5) << std::endl;
+	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(testGraph, testGraph.getStartingVertex(), testGraph.getVertices().at(50));
 	std::cout << "Dijkstra: " << get<1>(djikstra_output) << std::endl;
 	vector<Vertex> pathway = get<0>(djikstra_output);
 	reverse(pathway.begin(), pathway.end());
