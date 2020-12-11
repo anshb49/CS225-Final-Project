@@ -37,35 +37,20 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
   distance_djikstra[source] = 0;
   
   priority_queue<pair<int, Vertex>> p_queue; //pair of distance and Vertex
-  //map<int, Vertex> queueConverter;
-  // for (int i = 0; i < (int)g.getVertices().size() ; i++) {
-  //   //std::cout << __LINE__ << std::endl;
-  //   int d = distance_djikstra[(g.getVertices().at(i))];
-  //   pair<int, Vertex> p= make_pair(d, (g.getVertices().at(i)));
-  //   p_queue.push(p);
-  // }
-
   pair<int, Vertex> p= make_pair(0, source);
   p_queue.push(p);
-  //std::cout << __LINE__ << std::endl;
+
   Vertex current_node;
   Vertex last_node = current_node;
   while (p_queue.empty() == false) {
-    //std::cout << __LINE__ << std::endl;
-    //current_node = p_queue.top().second;
+    current_node = p_queue.top().second;
     p_queue.pop();
-
-    //std::cout << __LINE__ << std::endl;
-    std::cout << "current_node: "<< current_node << std::endl;
-    //std::cout << "size: " << g.getAdjacent(current_node).size() << std::endl;
     
     if (current_node == destination) {
       break;
     }
     for (Vertex v : g.getAdjacent(current_node)) {
       Edge e;
-      //std::cout << __LINE__ << std::endl;
-      //std::cout << v << std::endl;
       if (g.edgeExists(current_node, v)) {
         e = g.getEdge(current_node, v);
       } else {
@@ -73,9 +58,7 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
       }
       
       int cost = e.getWeight();
-      //std::cout << "cost: " << cost << std::endl;
       if (cost + distance_djikstra[current_node] < distance_djikstra[v]) {
-        //std::cout << __LINE__ << std::endl;
         distance_djikstra[v] = cost + distance_djikstra[current_node];
         
         previous_node[v] = current_node;
@@ -83,79 +66,97 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
         int d = distance_djikstra[v];
         pair<int, Vertex> temp= make_pair(d, v);
         p_queue.push(temp);
-        //std::cout << v << " " << current_node << "here" << std::endl;
       }
-      //std::cout << __LINE__ << std::endl;
     }
 
-    //std::cout << "empty> : " << p_queue.empty() << std::endl;
   }
   vector<Vertex> path;
   last_node = current_node;
   int distance = distance_djikstra[last_node];
-  //std::cout << previous_node[last_node] << " "<< source<< std::endl;
-  //std::cout << "distance: " << distance << std::endl;
-  //int count = 0;
+
   path.push_back(last_node);
   while (last_node != source && last_node != "") {
-    /* code */
-    //std::cout << __LINE__ << std::endl;
+
     Vertex p = previous_node[last_node];
-    //std::cout<< "Reached here" << previous_node[last_node] << std::endl;
+
     path.push_back(p);
     last_node = p;
-    //distance +=
-    //count++;
   }
-  //std::cout << __LINE__ << std::endl;
   tuple<vector<Vertex>, int> output_vals = make_tuple(path, distance);
   return output_vals;
 }
 
 
 vector<Vertex> GraphAlgo::A_Star(Graph g, Vertex source, Vertex destination){
-  priority_queue<Vertex> discovered_nodes;
+  priority_queue<pair<int, Vertex>> discovered_nodes; //pair of distance and Vertex
+  pair<int, Vertex> p= make_pair(0, source);
+  discovered_nodes.push(p);
+
   std::map<Vertex, Vertex> previous_node;
 
   std::map<Vertex, int> gScore_values;
-  gScore_values[source] = 0;
-
   std::map<Vertex, int> fScore_values;
+  for (Vertex v : g.getVertices()) {
+    gScore_values[v] = INT_MAX;
+    fScore_values[v] = INT_MAX;
+  }
+  gScore_values[source] = 0;
   fScore_values[source] = heuristic_fcn(source, destination);
 
+  Vertex current_node;
   while (discovered_nodes.empty() == false) {
-    Vertex current_node = discovered_nodes.top();
+    current_node = discovered_nodes.top().second;
     discovered_nodes.pop();
 
     if (current_node == destination) {
-      //Finish this
+      //Reached the destination
+      break;
     }
 
     for (Vertex v : g.getAdjacent(current_node)) {
-    
       int temp_gScore = gScore_values[current_node] + g.getEdgeWeight(current_node, v);
       if (temp_gScore < gScore_values[v]) {
         previous_node[v] = current_node;
         gScore_values[v] = temp_gScore;
         fScore_values[v] = gScore_values[v] + heuristic_fcn(v, destination);
 
-        /*
-        for (int i = 0; i < (int)discovered_nodes.size(); i++) {
-          
-        }
-        */
+        int d = fScore_values[v];
+        pair<int, Vertex> temp= make_pair(d, v);
+        discovered_nodes.push(temp);
       }
     }
 
-
   }
-  vector<Vertex> out;
-  return out;
+
+  
+  vector<Vertex> path;
+  Vertex last_node = current_node;
+
+  path.push_back(last_node);
+  while (last_node != source && last_node != "") {
+    Vertex p = previous_node[last_node];
+    path.push_back(p);
+    last_node = p;
+  }
+
+  return path;
 }
 
 
 
 int GraphAlgo::heuristic_fcn(Vertex start, Vertex dest) {
-  return get<1>(DijkstraAlgo(g, start, dest));
+    Edge e;
+
+    if (g.edgeExists(start, dest)) {
+      e = g.getEdge(start, dest);
+    } else if (g.edgeExists(dest, start)) {
+      e = g.getEdge(dest, start);
+    } else {
+      return 0;
+    }
+      
+    int cost = e.getWeight();
+    return cost;
+  //return get<1>(DijkstraAlgo(g, start, dest));
 }
 

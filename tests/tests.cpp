@@ -34,3 +34,10 @@ TEST_CASE("Verify that file_to_vector works on a small example") {
 	}
 }
 */
+
+//Dijkstra:
+// Compare path
+// check edge weight
+// check distance
+
+//COmpare A* and Djikstra

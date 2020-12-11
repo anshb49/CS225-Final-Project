@@ -72,5 +72,30 @@ std::vector<std::vector<std::string>>file_to_edges(const std::string & filename)
 	return edges_vector;
 } 
 
+std::string printBFSOutput(std::vector<int> inputBins) {
+	std::string output_string = "";
+	for (int i = 0; i < (int)inputBins.size(); i++) {
+        if (inputBins[i] < 1000) {
+			output_string = output_string + "0 - 1000 Views: " + std::to_string(inputBins[i]);
+
+        } else if (inputBins[i] < 10000) {
+			output_string = output_string + " 1000 - 100000 Views: " + std::to_string(inputBins[i]);
+
+        } else if (inputBins[i] < 50000) {
+			output_string = output_string + " 100001 - 50000 Views: " + std::to_string(inputBins[i]);
+
+        } else if (inputBins[i] < 100000) {
+			output_string = output_string + " 50001 - 100000 Views: " + std::to_string(inputBins[i]);
+
+        } else {
+			output_string = output_string + " Over 100000 Views: " + std::to_string(inputBins[i]);
+
+        }
+		//std::cout << BFS_output[i] << std::endl;
+	}
+	return output_string;
+
+}
+
 
 
