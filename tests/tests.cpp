@@ -73,6 +73,23 @@ TEST_CASE("Verify that the Graph is initialized correctly - Large Sample") {
 	REQUIRE(outputGraph.getVertices().size() == 4648);
 }
 
+TEST_CASE("Verify that the Graph BFS Algorithm - Small Sample") {
+	GraphInitializer gc(data_vector_SMALL, edgesVec_SMALL);
+	Graph outputGraph = gc.getGraph(); 
+
+	std::map<string, std::vector<string>> feat_map = gc.getFeaturesMap();
+	vector<int> BFS_output = outputGraph.BFS(outputGraph.getVertices().at(0), feat_map);
+
+	vector<int> correct_vector;
+	correct_vector.push_back(523);
+	correct_vector.push_back(1700);
+	correct_vector.push_back(744);
+	correct_vector.push_back(152);
+	correct_vector.push_back(309);
+	correct_vector.push_back(3428);
+    REQUIRE(BFS_output == correct_vector);
+}
+
 TEST_CASE("Verify that the Graph BFS Algorithm - Large Sample") {
 	GraphInitializer gc(data_vector, edgesVec);
 	Graph outputGraph = gc.getGraph(); 
@@ -88,6 +105,28 @@ TEST_CASE("Verify that the Graph BFS Algorithm - Large Sample") {
 	correct_vector.push_back(309);
 	correct_vector.push_back(3428);
     REQUIRE(BFS_output == correct_vector);
+}
+
+TEST_CASE("Verify that Dijkstra Algorithm returns Correct Path - Small Sample") {
+	GraphInitializer gc(data_vector_SMALL, edgesVec_SMALL);
+	Graph outputGraph = gc.getGraph(); 
+	GraphAlgo ga(outputGraph);
+	std::map<string, std::vector<string>> feat_map = gc.getFeaturesMap();
+
+	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(outputGraph, outputGraph.getVertices().at(218), outputGraph.getVertices().at(230));
+	reverse((get<0>(djikstra_output)).begin(), (get<0>(djikstra_output)).end());
+
+	vector<std::string> correct_vector;
+	correct_vector.push_back("556");
+	correct_vector.push_back("1809");
+	correct_vector.push_back("2099");
+	correct_vector.push_back("4341");
+
+	REQUIRE(get<0>(djikstra_output).size() == correct_vector.size());
+
+	for (int i = 0; i < (int)get<0>(djikstra_output).size(); i++) {
+		REQUIRE(get<0>(djikstra_output).at(i) == correct_vector[i]);
+	}
 }
 
 TEST_CASE("Verify that Dijkstra Algorithm returns Correct Path - Large Sample") {

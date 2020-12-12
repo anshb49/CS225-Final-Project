@@ -1,66 +1,27 @@
-# Escape
+# CS225 Twitch Final Project
 
-[![license](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![docs](https://img.shields.io/badge/docs-yes-brightgreen)](docs/README.md)
 
 
-Author: [Ansh Bhalla]
+Author: [Ansh Bhalla, Pranav Srinivasan, Raj Pulugurtha]
 
 ---
-![image](assets/game_gif.gif)
 
-**How To Play**
+**How To Run Dataset Analysis**
 -
-- Use the arrow keys to control the player after you get 
-- Any contact with the monsters will or fire will cause you to lose the game
-- There is a shield potion that makes you invincible for a certain amount of time 
-- After you come in contact with the fire or monster, the game ends
-![image](assets/gameEND.png)
+- To run the Dataset Analysis, type the following command into the terminal: make && ./finalproj _____
+- Replace the blank with the country you would like to run the analysis on. The options are: DE, ENGB, ES, FR, PTBR, and RU.
+- In the case that the destination could not be found, the terminal will indicate: "The chosen destination could not be found. This may be due to the starting and ending nodes being in different connected components".
+- An example is provided below:
+![image](CS225MakeCommand.png)
 
-**Dependencies**
+**Analysis Output**
 -
-- [SQLite](https://github.com/SqliteModernCpp/sqlite_modern_cpp/tree/dev)
-  - This is used to create a leaderboard for the game and keep track
-  of each player's score, along with displaying the top scores.
-- [GFlags](https://github.com/gflags/gflags)
-  - Used to take in the player's name and desired level using
-  the program arguments
+- When the analysis command is run, the program outputs a series of values that were created based on the different algorithms. The first algorithm that the program runs is the BFS algorithm, which prints out the features of the user that is currently being traversed. Following this printing of the traversals, data is outputted regarding the views of all the people in the graph. The views are placed into categories based on the amounts and the terminal will display the number of users under each category of views. The second and third algorithms that the program runs is the Dijkstra Algorithm and the A* Algorithm which print out a variety of information. First, the source and destination vertexes are printed out followed by the path and distance that was taken to go from the source to the destination. The features of each user in the path are printed out for a better visualization. Finally, the average number of views and the average number of days of the account creation are then calculated and displayed. 
+
+
  
-**How To Setup**  
+**Algorithms**  
 -
-- Download Cinder
-- Extract that downloaded file into a seperate folder
-- Open this folder in CLion
-- Click the green run (play button) button 
-at the top right part of the screen
-    - Doing this will build libcinder, and this process only
-    has to be done once
-- Create a directory, calling it another name such as 
-my-projects in the downloaded cinder file
-- Clone this project into this folder
+- Our project involved using three different algorithms in order to gather and analyze the data. The first algorithm that was uses was the Breadth-First Search algorithm, or BFS. The BFS algorithm was used to traverse the graph and go through each vertex from the starting node in order to access each user's features. The Dijkstra Algorithm was used to find the shortest path between two users, or between two vertexes. This was accomplished by utilizing a priority queue, keeping track of the distances for each vertex, and keeping track of the previous vertex for each vertex in the graph. Using this, we were able to go through each of the edges and update the distance values. Finally, we simply traced back the path and returned both the path of vertices and the distance of the path. The third algorithm that we used in our project is the A* algorithm which also find the shortest path between two vertices. This was done by creating maps for different weight values of the vertices along with a priority queue to keep track of the discovered vertices. In the A* algorithm, we used a heuristic function which is a part of the A* implementation and this allows for the algorithm to add values in the map which will be used to find the shortest path between the vertices. Similar to Dijkstra, the path of vertices will be outputted, and if the destination was not found, a message will be printed out.
 
-**MacOS Users**
--
-- There is a change you may encounter an error of:
-   `Error running 'cinder-snake': Cannot run program … cinder-snake.app/Contents/Resources"): error=13, Permission denied`
-- In this case, Edit configurations -> Executable -> Select Other -> 
-Find my-projects/my-app/cmake-build-debug/Debug/cinder-myapp/Contents/MacOS/cinder-myapp And click run once again.
-
-**Gflags Arguments**
--
-- These are the program arguments to enter your name, and even change the level
-- To do this, go to, Edit configurations -> Program Arguments and enter (for example):
-    - "--name=Bob" "--level=1"
-- Level 1 represents Easy, Level 2 represents Medium, and Level 3 represents Hard
-
-
-**Controls**
--
-Keyboard
-
-| Key | Action |
-| ---------------|----------------|
-|Left Arrow Key |Move to the Left|
-|Right Arrow Key |Move to the Right|
-|Up Arrow Key   |Move Up|
-|Left Arrow Key |Move Down|
