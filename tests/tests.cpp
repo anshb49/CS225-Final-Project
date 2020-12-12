@@ -50,7 +50,7 @@ TEST_CASE("Verify BFS output string is accurate") {
 	sampleBFSout.push_back(267);
 	sampleBFSout.push_back(2794);
 
-	std::string correct_string = "0 - 1000 Views: 297 ||  1000 - 100000 Views: 1411 ||  100001 - 50000 Views: 693 ||  50001 - 100000 Views: 126 ||  Over 100000 Views: 267 ||  Total Vertices: 2794 || ";
+	std::string correct_string = "0 - 1000 Views: 297 ||  1000 - 10000 Views: 1411 ||  10001 - 50000 Views: 693 ||  50001 - 100000 Views: 126 ||  Over 100000 Views: 267 ||  Total Vertices: 2794 || ";
 
     REQUIRE(printBFSOutput(sampleBFSout) == correct_string);
 }

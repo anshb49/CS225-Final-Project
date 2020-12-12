@@ -12,30 +12,18 @@ GraphAlgo::GraphAlgo(Graph g_) {
 }
 
 tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Vertex destination){
-  // initialize distances  // initialize tentative distance value
-  // initialize previous   // initialize a map that maps current node -> its previous node
-  // initialize priority_queue   // initialize the priority queue
-  // initialize visited
-
-  // while the top of priority_queue is not destination:
-  //     get the current_node from priority_queue
-  //     for neighbor in current_node's neighbors and not in visited:
-  //         if update its neighbor's distances:
-  //             previous[neighbor] = current_node
-  //     save current_node into visited
-
-  // extract path from previous
-  // return path and distance
 
   std::map<Vertex, int> distance_djikstra;
   std::map<Vertex, Vertex> previous_node;
 
+  //initialized map values to infinite and set distance at the source to 0
   for (Vertex v : g.getVertices()) {
     distance_djikstra[v] = INT_MAX; //infinite;
     previous_node[v] = "test";
   }
   distance_djikstra[source] = 0;
   
+  //Initialize priority queue and push in starting vertex
   priority_queue<pair<int, Vertex>, vector<pair<int, Vertex>>, std::greater<pair<int, Vertex>>> p_queue; //pair of distance and Vertex
   pair<int, Vertex> p= make_pair(0, source);
   p_queue.push(p);
@@ -43,13 +31,13 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
   Vertex current_node;
   Vertex last_node = current_node;
   while (p_queue.empty() == false) {
-    current_node = p_queue.top().second;
+    current_node = p_queue.top().second; //get top value off queue
     p_queue.pop();
     
-    if (current_node == destination) {
+    if (current_node == destination) { //leave method if destination is found
       break;
     }
-    for (Vertex v : g.getAdjacent(current_node)) {
+    for (Vertex v : g.getAdjacent(current_node)) { //go through all adjacent edges
       Edge e;
       if (g.edgeExists(current_node, v)) {
         e = g.getEdge(current_node, v);
@@ -57,6 +45,7 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
         e = g.getEdge(v, current_node);
       }
       
+      //perform correct weight calculation and set values in map 
       int cost = e.getWeight();
       if (cost + distance_djikstra[current_node] < distance_djikstra[v]) {
         distance_djikstra[v] = cost + distance_djikstra[current_node];
@@ -65,7 +54,7 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
 
         int d = distance_djikstra[v];
         pair<int, Vertex> temp= make_pair(d, v);
-        p_queue.push(temp);
+        p_queue.push(temp); //push new value back into priority queue
       }
     }
 
@@ -74,41 +63,46 @@ tuple<vector<Vertex>, int> GraphAlgo::DijkstraAlgo(Graph g, Vertex source, Verte
   last_node = current_node;
   int distance = distance_djikstra[last_node];
 
-  if (last_node != destination) {
+  if (last_node != destination) { //Case where destination was not found
     cout << "The chosen destination could not be found. This may be due to the starting and ending nodes being in different connected components" << endl;
     distance = -1;
   }
 
-  path.push_back(last_node);
+  path.push_back(last_node); //push back the last current vertex
+  //continue while loop and keep pushing path vertices back until not "" or equal to source
   while (last_node != source && last_node != "") {
-
     Vertex p = previous_node[last_node];
-
     path.push_back(p);
     last_node = p;
   }
+  
+  //create a tuple of path of algorithm and distance for output
   tuple<vector<Vertex>, int> output_vals = make_tuple(path, distance);
   return output_vals;
 }
 
 
 vector<Vertex> GraphAlgo::A_Star(Graph g, Vertex source, Vertex destination){
+  //initialize priority queue and push back the source
   priority_queue<pair<int, Vertex>, vector<pair<int, Vertex>>, std::greater<pair<int, Vertex>>> discovered_nodes; //pair of distance and Vertex
   pair<int, Vertex> p= make_pair(0, source);
   discovered_nodes.push(p);
 
+  //create map for keeping track of previous nodes and map for weight values for main algorithm use
   std::map<Vertex, Vertex> previous_node;
-
   std::map<Vertex, int> gScore_values;
   std::map<Vertex, int> fScore_values;
+
+  //Go through all vertices and set fscore and gscore map values to maximum
   for (Vertex v : g.getVertices()) {
     gScore_values[v] = INT_MAX;
     fScore_values[v] = INT_MAX;
   }
-  gScore_values[source] = 0;
-  fScore_values[source] = heuristic_fcn(source, destination);
+  gScore_values[source] = 0; //start gscore for source is 0
+  fScore_values[source] = heuristic_fcn(source, destination); //call heuristic function for fscore start
 
-  Vertex current_node;
+  Vertex current_node; 
+  //iterate through discovered nodes queue
   while (discovered_nodes.empty() == false) {
     current_node = discovered_nodes.top().second;
     discovered_nodes.pop();
@@ -118,16 +112,17 @@ vector<Vertex> GraphAlgo::A_Star(Graph g, Vertex source, Vertex destination){
       break;
     }
 
+    //go through all adjacent edges and add weight values to produce correct output path
     for (Vertex v : g.getAdjacent(current_node)) {
       int temp_gScore = gScore_values[current_node] + g.getEdgeWeight(current_node, v);
-      if (temp_gScore < gScore_values[v]) {
+      if (temp_gScore < gScore_values[v]) { //if it is less then current gscore
         previous_node[v] = current_node;
         gScore_values[v] = temp_gScore;
-        fScore_values[v] = gScore_values[v] + heuristic_fcn(v, destination);
+        fScore_values[v] = gScore_values[v] + heuristic_fcn(v, destination); // call heuristic with current vertex and parameter destination
 
         int d = fScore_values[v];
         pair<int, Vertex> temp= make_pair(d, v);
-        discovered_nodes.push(temp);
+        discovered_nodes.push(temp); //push new value back into the queue
       }
     }
 
@@ -137,17 +132,18 @@ vector<Vertex> GraphAlgo::A_Star(Graph g, Vertex source, Vertex destination){
   vector<Vertex> path;
   Vertex last_node = current_node;
 
-  if (last_node != destination) {
+  if (last_node != destination) { //Case where destination does not exist
     cout << "The chosen destination could not be found. This may be due to the starting and ending nodes being in different connected components" << endl;
   }
   path.push_back(last_node);
+  //Keep looping until path is created successfully
   while (last_node != source && last_node != "") {
     Vertex p = previous_node[last_node];
     path.push_back(p);
     last_node = p;
   }
 
-  return path;
+  return path; //output path of shortest path between start and destination
 }
 
 
@@ -155,6 +151,7 @@ vector<Vertex> GraphAlgo::A_Star(Graph g, Vertex source, Vertex destination){
 int GraphAlgo::heuristic_fcn(Vertex start, Vertex dest) {
     Edge e;
 
+    //Make sure that edge is existent and set current edge to that getEdge()
     if (g.edgeExists(start, dest)) {
       e = g.getEdge(start, dest);
     } else if (g.edgeExists(dest, start)) {
@@ -162,9 +159,9 @@ int GraphAlgo::heuristic_fcn(Vertex start, Vertex dest) {
     } else {
       return 0;
     }
-      
+    
+    //return weight value of the current edge that was found
     int cost = e.getWeight();
     return cost;
-  //return get<1>(DijkstraAlgo(g, start, dest));
 }
 

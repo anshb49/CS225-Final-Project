@@ -1,15 +1,8 @@
-/**
- * @file NimLearner.cpp
- * CS 225: Data Structures
- */
-
 #include "interpretgraph.h"
 #include <ctime>
 
 
 GraphInitializer::GraphInitializer(std::vector<std::vector<std::string>> feat_vec, std::vector<std::vector<std::string>> edge_vec) : g_(true, true) {
-    /* Your code goes here! */
-
     currentfeatures_vec = feat_vec;
     currentedges_vec = edge_vec;
 
@@ -38,7 +31,7 @@ GraphInitializer::GraphInitializer(std::vector<std::vector<std::string>> feat_ve
         }
     }
 
-
+    //Create edges that are left and se edge weights
     for (int i = 0; i < (int)currentedges_vec.size(); i++) {
         string from_edge = currentedges_vec[i].at(0);
         string to_edge = currentedges_vec[i].at(1);
@@ -46,18 +39,11 @@ GraphInitializer::GraphInitializer(std::vector<std::vector<std::string>> feat_ve
         g_.setEdgeWeight(from_edge, to_edge, stoi(graph_map[to_edge].at(3)));   //set edge weight to views
     } 
 
+    //set private variable featuresMAP to created graph_map
     featuresMAP = graph_map;
   }
 
 
-
-
-
-/**
- * Returns a constant reference to the state space graph.
- *
- * @returns A constant reference to the state space graph.
- */
 const Graph & GraphInitializer::getGraph() const {
   return g_;
 }

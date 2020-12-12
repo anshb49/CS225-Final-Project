@@ -15,7 +15,7 @@ vector<int> Graph::BFS(Vertex starting_vertex, std::map<string, std::vector<stri
     ref_queue.push(starting_vertex);
     visited_nodes[starting_vertex] = true;
 
-    int bin1 = 0;
+    int bin1 = 0; //Create bins to store total values for views category
     int bin2 = 0;
     int bin3 = 0;
     int bin4 = 0;
@@ -32,6 +32,7 @@ vector<int> Graph::BFS(Vertex starting_vertex, std::map<string, std::vector<stri
         std::string bfs_output = "ID: " + feat_map[current_vertex].at(0) + " Days: " + feat_map[current_vertex].at(1) + " Mature: " + feat_map[current_vertex].at(2) + " Views: " +feat_map[current_vertex].at(3) + " Partner: " + feat_map[current_vertex].at(4) + " New ID: " + feat_map[current_vertex].at(5); 
         std::cout << bfs_output << std::endl;
 
+        //place number of views into correct category
         int views = stoi(feat_map[current_vertex].at(3));
         if (views < 1000) {
             bin1++;
@@ -55,6 +56,7 @@ vector<int> Graph::BFS(Vertex starting_vertex, std::map<string, std::vector<stri
         }
     }
 
+    //Push back bin values to vector that will be returned
     vector<int> output_vector;
     output_vector.push_back(bin1);
     output_vector.push_back(bin2);
@@ -63,7 +65,6 @@ vector<int> Graph::BFS(Vertex starting_vertex, std::map<string, std::vector<stri
     output_vector.push_back(bin5);
     output_vector.push_back(total);
     return output_vector;
-    
 }
 
 

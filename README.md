@@ -13,7 +13,7 @@ Author: [Ansh Bhalla, Pranav Srinivasan, Raj Pulugurtha]
 - Replace the blank with the country you would like to run the analysis on. The options are: DE, ENGB, ES, FR, PTBR, and RU.
 - In the case that the destination could not be found, the terminal will indicate: "The chosen destination could not be found. This may be due to the starting and ending nodes being in different connected components".
 - An example is provided below:
-![image](CS225MakeCommand.png)
+![image](makeimage.png)
 
 **Analysis Output**
 -
