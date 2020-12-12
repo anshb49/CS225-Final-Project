@@ -10,7 +10,7 @@ Author: Ansh Bhalla, Pranav Srinivasan, Raj Pulugurtha
 **How To Run Dataset Analysis**
 -
 - To run the Dataset Analysis, type the following command into the terminal: make && ./finalproj ES
-- In the case that the destination could not be found, the terminal will indicate: "The chosen destination could not be found. This may be due to the starting and ending nodes being in different connected components".
+- In the case that the destination could not be found, the terminal will indicate: "The chosen destination could not be found. This may be due to the starting and ending nodes being in different connected components". 
 - An example is provided below:
 
 
@@ -34,8 +34,9 @@ Author: Ansh Bhalla, Pranav Srinivasan, Raj Pulugurtha
 **Files**
 -
 - main.cpp
-- parser.h / parser.cpp
-- interpretgraph.h / interpretgraph.cpp
-- graphcreator.h / graphcreator.cpp
-- GraphAlgo.h / GraphAlgo.cpp
-- graph.h / graph.cpp
+- parser.h / parser.cpp (reading text files and converting into vector)
+- interpretgraph.h / interpretgraph.cpp (Graph Creation)
+- GraphAlgo.h / GraphAlgo.cpp (Dijkstra and A*)
+- graph.h / graph.cpp (Base Graph File + BFS)
+- musae_ES_edges.csv/musae_ES_target.csv (Data - Larger Sample Size)
+- musae_TEST_edges.csv/musae_TEST_target.csv (Data - Smaller Sample Size)
