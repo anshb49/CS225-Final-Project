@@ -31,12 +31,14 @@ GraphInitializer::GraphInitializer(std::vector<std::vector<std::string>> feat_ve
         previousID = currentedges_vec[i].at(0);
     }
 
+    std::cout << "here" << currentedges_vec.size() << std::endl;
     for (int i = 0; i < (int)currentedges_vec.size(); i++) {
         string from_edge = currentedges_vec[i].at(0);
         string to_edge = currentedges_vec[i].at(1);
 
         g_.insertEdge(from_edge, to_edge);
         g_.setEdgeWeight(from_edge, to_edge, stoi(graph_map[to_edge].at(3)));   //set edge weight to views
+        //std::cout << "completed iteratrion" << std::endl;
     } 
 
     featuresMAP = graph_map;
