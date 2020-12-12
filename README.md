@@ -30,3 +30,13 @@ Author: Ansh Bhalla, Pranav Srinivasan, Raj Pulugurtha
 -
 - Our project involved using three different algorithms in order to gather and analyze the data. The first algorithm that was uses was the Breadth-First Search algorithm, or BFS. The BFS algorithm was used to traverse the graph and go through each vertex from the starting node in order to access each user's features. The Dijkstra Algorithm was used to find the shortest path between two users, or between two vertexes. This was accomplished by utilizing a priority queue, keeping track of the distances for each vertex, and keeping track of the previous vertex for each vertex in the graph. Using this, we were able to go through each of the edges and update the distance values. Finally, we simply traced back the path and returned both the path of vertices and the distance of the path. The third algorithm that we used in our project is the A* algorithm which also find the shortest path between two vertices. This was done by creating maps for different weight values of the vertices along with a priority queue to keep track of the discovered vertices. In the A* algorithm, we used a heuristic function which is a part of the A* implementation and this allows for the algorithm to add values in the map which will be used to find the shortest path between the vertices. Similar to Dijkstra, the path of vertices will be outputted, and if the destination was not found, a message will be printed out.
 
+
+
+**Files**
+-
+- main.cpp
+- parser.h / parser.cpp
+- interpretgraph.h / interpretgraph.cpp
+- graphcreator.h / graphcreator.cpp
+- GraphAlgo.h / GraphAlgo.cpp
+- graph.h / graph.cpp
