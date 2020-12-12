@@ -15,26 +15,33 @@ GraphInitializer::GraphInitializer(std::vector<std::vector<std::string>> feat_ve
 
     std::map<string, std::vector<string>> graph_map;
 
+    std::map<Vertex, bool> visited;
+
     //Create map containing features with key as newID and value as vector of features
     for (int i = 0; i < (int)currentfeatures_vec.size(); i++) {
         graph_map[currentfeatures_vec[i][5]] = currentfeatures_vec[i];
+        visited[currentfeatures_vec[i][5]] = false;
     }
 
+    
     //Create vertices for FROM values in edges file
-    string previousID = ",";
     for (int i = 0; i < (int)currentedges_vec.size(); i++) {
-        if (previousID == currentedges_vec[i].at(0)) {
-            continue;
-        }
         Vertex v1 = currentedges_vec[i].at(0);
-        g_.insertVertex(v1);
-        previousID = currentedges_vec[i].at(0);
+        if (visited[v1] == false) {
+           g_.insertVertex(v1);
+           visited[v1] = true;
+        }
+        Vertex v2 = currentedges_vec[i].at(1);
+        if (visited[v2] == false) {
+           g_.insertVertex(v2);
+           visited[v2] = true;
+        }
     }
+
 
     for (int i = 0; i < (int)currentedges_vec.size(); i++) {
         string from_edge = currentedges_vec[i].at(0);
         string to_edge = currentedges_vec[i].at(1);
-
         g_.insertEdge(from_edge, to_edge);
         g_.setEdgeWeight(from_edge, to_edge, stoi(graph_map[to_edge].at(3)));   //set edge weight to views
     } 

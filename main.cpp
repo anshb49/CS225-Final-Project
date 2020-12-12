@@ -26,11 +26,13 @@ int main(int argc, const char * argv[]) {
 	vector<int> BFS_output = testGraph.BFS(testGraph.getVertices().at(0), feat_map); //Create Presenation for BFS output
 	std::cout << printBFSOutput(BFS_output) << std::endl;
 	
+	Vertex startVertex = testGraph.getVertices().at(218);
+	Vertex destVertex = testGraph.getVertices().at(230);
 	
 	GraphAlgo ga(testGraph);
-	std::cout << "Dijkstra Source: " << feat_map[testGraph.getStartingVertex()].at(5) << std::endl;
-	std::cout << "Dijkstra Destination: " << feat_map[testGraph.getVertices().at(50)].at(5) << std::endl;
-	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(testGraph, testGraph.getStartingVertex(), testGraph.getVertices().at(50));
+	std::cout << "Dijkstra Source: " << feat_map[startVertex].at(5) << std::endl;
+	std::cout << "Dijkstra Destination: " << feat_map[destVertex].at(5) << std::endl;
+	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(testGraph, startVertex, destVertex);
 	std::cout << "Dijkstra: " << get<1>(djikstra_output) << std::endl;
 	vector<Vertex> pathway = get<0>(djikstra_output);
 	reverse(pathway.begin(), pathway.end());
@@ -64,9 +66,9 @@ int main(int argc, const char * argv[]) {
 	cout << "" << endl;
 	
 
-	vector<Vertex> a_output = ga.A_Star(testGraph, testGraph.getStartingVertex(), testGraph.getVertices().at(50));
-	std::cout << "A* Source: " << feat_map[testGraph.getStartingVertex()].at(5) << std::endl;
-	std::cout << "A* Destination: " << feat_map[testGraph.getVertices().at(50)].at(5) << std::endl;
+	vector<Vertex> a_output = ga.A_Star(testGraph, startVertex, destVertex);
+	std::cout << "A* Source: " << feat_map[startVertex].at(5) << std::endl;
+	std::cout << "A* Destination: " << feat_map[destVertex].at(5) << std::endl;
 	reverse(a_output.begin(), a_output.end());
 	vector<vector<std::string>> astar_data;
 	cout<< "A* Path: ";

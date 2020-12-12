@@ -6,11 +6,13 @@
 #include "../interpretgraph.h"
 #include "../GraphAlgo.h"
 
-std::vector<std::vector<std::string>> data_vector = file_to_data("musae_ENGB_target.csv"); 
-std::vector<std::vector<std::string>> edgesVec = file_to_edges("musae_ENGB_edges.csv"); 
+std::vector<std::vector<std::string>> data_vector = file_to_data("musae_ES_target.csv"); 
+std::vector<std::vector<std::string>> edgesVec = file_to_edges("musae_ES_edges.csv"); 
 
-std::vector<std::vector<std::string>> data_vector_SMALL = file_to_data("musae_TEST_target.csv"); 
+std::vector<std::vector<std::string>> data_vector_SMALL = file_to_edges("musae_TEST_target.csv"); 
 std::vector<std::vector<std::string>> edgesVec_SMALL = file_to_edges("musae_TEST_edges.csv"); 
+
+
 
 TEST_CASE("Verify parsing data vector values are accurate - Small Sample") {
     std::vector<std::vector<std::string>> data_vector = file_to_data("musae_TEST_target.csv");
@@ -19,23 +21,23 @@ TEST_CASE("Verify parsing data vector values are accurate - Small Sample") {
 }
 
 TEST_CASE("Verify parsing data vector values are accurate - Large Sample") {
-    std::vector<std::vector<std::string>> data_vector = file_to_data("musae_ENGB_target.csv");
-	REQUIRE(data_vector[14].at(5) == "639");
-    REQUIRE(data_vector[33].at(5) == "634");
-    REQUIRE(data_vector[88].at(5) == "5956");
+    std::vector<std::vector<std::string>> data_vector = file_to_data("musae_ES_target.csv");
+	REQUIRE(data_vector[14].at(5) == "4123");
+    REQUIRE(data_vector[33].at(5) == "3320");
+    REQUIRE(data_vector[88].at(5) == "208");
 }
 
 TEST_CASE("Verify parsing edges vector values are accurate - Small Sample") {
 	std::vector<std::vector<std::string>> edgesVec = file_to_edges("musae_TEST_edges.csv"); 
     REQUIRE(edgesVec[1].at(1) == "220");
-	REQUIRE(edgesVec[3].at(0) == "380");
+	REQUIRE(edgesVec[3].at(1) == "1170");
 }
 
 TEST_CASE("Verify parsing edges vector values are accurate - Large Sample") {
-	std::vector<std::vector<std::string>> edgesVec = file_to_edges("musae_ENGB_edges.csv"); 
-    REQUIRE(edgesVec[0].at(1) == "255");
+	std::vector<std::vector<std::string>> edgesVec = file_to_edges("musae_ES_edges.csv"); 
+    REQUIRE(edgesVec[0].at(1) == "1819");
 	REQUIRE(edgesVec[23].at(0) == "3");
-    REQUIRE(edgesVec[617].at(1) == "3017");
+    REQUIRE(edgesVec[617].at(1) == "1985");
 }
 
 
@@ -57,18 +59,18 @@ TEST_CASE("Verify that the Graph is initialized correctly - Small Sample") {
 	GraphInitializer gc(data_vector_SMALL, edgesVec_SMALL);
 	Graph outputGraph = gc.getGraph(); 
 	
-    REQUIRE(outputGraph.getStartingVertex() == "1991");
-	REQUIRE(outputGraph.getEdges().size() == 35324);
-	REQUIRE(outputGraph.getVertices().size() == 5447);
+    REQUIRE(outputGraph.getStartingVertex() == "1170");
+	REQUIRE(outputGraph.getEdges().size() == 14);
+	REQUIRE(outputGraph.getVertices().size() == 14);
 }
 
 TEST_CASE("Verify that the Graph is initialized correctly - Large Sample") {
 	GraphInitializer gc(data_vector, edgesVec);
 	Graph outputGraph = gc.getGraph(); 
 	
-    REQUIRE(outputGraph.getStartingVertex() == "1991");
-	REQUIRE(outputGraph.getEdges().size() == 35324);
-	REQUIRE(outputGraph.getVertices().size() == 5447);
+    REQUIRE(outputGraph.getStartingVertex() == "217");
+	REQUIRE(outputGraph.getEdges().size() == 59382);
+	REQUIRE(outputGraph.getVertices().size() == 4648);
 }
 
 TEST_CASE("Verify that the Graph BFS Algorithm - Large Sample") {
@@ -79,12 +81,12 @@ TEST_CASE("Verify that the Graph BFS Algorithm - Large Sample") {
 	vector<int> BFS_output = outputGraph.BFS(outputGraph.getVertices().at(0), feat_map);
 
 	vector<int> correct_vector;
-	correct_vector.push_back(297);
-	correct_vector.push_back(1411);
-	correct_vector.push_back(693);
-	correct_vector.push_back(126);
-	correct_vector.push_back(267);
-	correct_vector.push_back(2794);
+	correct_vector.push_back(523);
+	correct_vector.push_back(1700);
+	correct_vector.push_back(744);
+	correct_vector.push_back(152);
+	correct_vector.push_back(309);
+	correct_vector.push_back(3428);
     REQUIRE(BFS_output == correct_vector);
 }
 
@@ -94,15 +96,14 @@ TEST_CASE("Verify that Dijkstra Algorithm returns Correct Path - Large Sample") 
 	GraphAlgo ga(outputGraph);
 	std::map<string, std::vector<string>> feat_map = gc.getFeaturesMap();
 
-	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(outputGraph, outputGraph.getStartingVertex(), outputGraph.getVertices().at(50));
+	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(outputGraph, outputGraph.getVertices().at(218), outputGraph.getVertices().at(230));
 	reverse((get<0>(djikstra_output)).begin(), (get<0>(djikstra_output)).end());
 
 	vector<std::string> correct_vector;
-	correct_vector.push_back("1991");
-	correct_vector.push_back("2262");
-	correct_vector.push_back("2275");
-	correct_vector.push_back("3237");
-	correct_vector.push_back("5296");
+	correct_vector.push_back("556");
+	correct_vector.push_back("1809");
+	correct_vector.push_back("2099");
+	correct_vector.push_back("4341");
 
 	REQUIRE(get<0>(djikstra_output).size() == correct_vector.size());
 
@@ -117,9 +118,9 @@ TEST_CASE("Verify that Dijkstra Algorithm returns Correct Distance - Large Sampl
 	GraphAlgo ga(outputGraph);
 	std::map<string, std::vector<string>> feat_map = gc.getFeaturesMap();
 
-	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(outputGraph, outputGraph.getStartingVertex(), outputGraph.getVertices().at(50));
+	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(outputGraph, outputGraph.getVertices().at(218), outputGraph.getVertices().at(230));
 
-	REQUIRE(get<1>(djikstra_output) == 9681018);
+	REQUIRE(get<1>(djikstra_output) == 165839);
 }
 
 TEST_CASE("Verify that Dijkstra Algorithm returns Failed Destination - Large Sample") {
@@ -128,7 +129,7 @@ TEST_CASE("Verify that Dijkstra Algorithm returns Failed Destination - Large Sam
 	GraphAlgo ga(outputGraph);
 	std::map<string, std::vector<string>> feat_map = gc.getFeaturesMap();
 
-	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(outputGraph, outputGraph.getStartingVertex(), outputGraph.getVertices().at(40));
+	tuple<vector<Vertex>, int> djikstra_output = ga.DijkstraAlgo(outputGraph, outputGraph.getVertices().at(218), outputGraph.getVertices().at(40));
 
 	REQUIRE(get<1>(djikstra_output) == -1);
 }
@@ -142,15 +143,14 @@ TEST_CASE("Verify that A* Algorithm returns Correct Path - Large Sample") {
 	std::map<string, std::vector<string>> feat_map = gc.getFeaturesMap();
 
 
-	vector<Vertex> astar_output = ga.A_Star(outputGraph, outputGraph.getStartingVertex(), outputGraph.getVertices().at(50));
+	vector<Vertex> astar_output = ga.A_Star(outputGraph, outputGraph.getVertices().at(218), outputGraph.getVertices().at(230));
 	reverse(((astar_output)).begin(), ((astar_output)).end());
 
 	vector<std::string> correct_vector;
-	correct_vector.push_back("1991");
-	correct_vector.push_back("2262");
-	correct_vector.push_back("2275");
-	correct_vector.push_back("3237");
-	correct_vector.push_back("5296");
+	correct_vector.push_back("556");
+	correct_vector.push_back("1809");
+	correct_vector.push_back("2099");
+	correct_vector.push_back("4341");
 
 	REQUIRE(astar_output.size() == correct_vector.size());
 
@@ -165,13 +165,13 @@ TEST_CASE("Verify that A* Algorithm output contains Correct Edge Weight - Large 
 	GraphAlgo ga(outputGraph);
 	std::map<string, std::vector<string>> feat_map = gc.getFeaturesMap();
 
-	vector<Vertex> astar_output = ga.A_Star(outputGraph, outputGraph.getStartingVertex(), outputGraph.getVertices().at(50));
+	vector<Vertex> astar_output = ga.A_Star(outputGraph, outputGraph.getVertices().at(218), outputGraph.getVertices().at(230));
 	reverse(((astar_output)).begin(), ((astar_output)).end());
 
 	vector<int> correct_vector;
-	correct_vector.push_back(4932901);
-	correct_vector.push_back(19745);
-	correct_vector.push_back(178508);
+	correct_vector.push_back(6549);
+	correct_vector.push_back(13551);
+	correct_vector.push_back(145739);
 	correct_vector.push_back(4549864);
 
 	for (int i = 0; i < (int)(astar_output).size() - 1; i++) {
