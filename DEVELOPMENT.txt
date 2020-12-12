@@ -36,7 +36,7 @@ Week 2: 11/30 - 12/7
     was done in MP Traversals. However, after some time we realized that we were making it much more complicated than 
     it needed to be, and so we adjusted by moving the function to where the graph implementation was and invoking
     it there, based on an implementation provided in the CS 225 Resources page on the website. Going into the third week, 
-    we have started the Dijkstra implementation, and aim to finish both that and PageRank by Tuesday so that we can thoroughly
+    we have started the Dijkstra implementation, and aim to finish both that and A* Search by Tuesday so that we can thoroughly
     test what we have done and work on the presentation aspect of the project on the last two days.   
 
 Week 3: 12/7 - 12/11
