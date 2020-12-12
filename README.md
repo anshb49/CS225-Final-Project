@@ -3,7 +3,7 @@
 [![docs](https://img.shields.io/badge/docs-yes-brightgreen)](docs/README.md)
 
 
-Author: [Ansh Bhalla, Pranav Srinivasan, Raj Pulugurtha]
+Author: Ansh Bhalla, Pranav Srinivasan, Raj Pulugurtha
 
 ---
 
