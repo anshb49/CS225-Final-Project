@@ -27,8 +27,8 @@ TEST_CASE("Verify parsing data vector values are accurate - Large Sample") {
 
 TEST_CASE("Verify parsing edges vector values are accurate - Small Sample") {
 	std::vector<std::vector<std::string>> edgesVec = file_to_edges("musae_TEST_edges.csv"); 
-    REQUIRE(edgesVec[1].at(1) == "980");
-	REQUIRE(edgesVec[3].at(0) == "220");
+    REQUIRE(edgesVec[1].at(1) == "220");
+	REQUIRE(edgesVec[3].at(0) == "380");
 }
 
 TEST_CASE("Verify parsing edges vector values are accurate - Large Sample") {
