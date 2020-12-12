@@ -7,7 +7,14 @@
 
 
 int main(int argc, const char * argv[]) {
+	cout << "" << endl;
+	cout << "" << endl;
+	cout << "" << endl;
+
 	std::cout << "Filename: " << argv[1] << std::endl;
+
+	cout << "" << endl;
+	cout << "" << endl;
 
 	//std::cout << "Vector Representation:" << std::endl;
 	std::string fileTarget = argv[1];
@@ -23,11 +30,16 @@ int main(int argc, const char * argv[]) {
 
 	
 	std::map<string, std::vector<string>> feat_map = gc.getFeaturesMap();
-	vector<int> BFS_output = testGraph.BFS(testGraph.getVertices().at(0), feat_map); //Create Presenation for BFS output
+	vector<int> BFS_output = testGraph.BFS(testGraph.getStartingVertex(), feat_map); //Create Presenation for BFS output
 	std::cout << printBFSOutput(BFS_output) << std::endl;
-	
-	Vertex startVertex = testGraph.getVertices().at(218);
-	Vertex destVertex = testGraph.getVertices().at(230);
+
+	cout << "" << endl;
+	cout << "" << endl;
+	Vertex startVertex;
+	Vertex destVertex;
+
+	startVertex = testGraph.getVertices().at(218);
+	destVertex = testGraph.getVertices().at(230);
 	
 	GraphAlgo ga(testGraph);
 	std::cout << "Dijkstra Source: " << feat_map[startVertex].at(5) << std::endl;
@@ -95,5 +107,10 @@ int main(int argc, const char * argv[]) {
 	double avg_days_astar = total_days_astar / dijk_data.size();
 	std::cout << "A* Algorithm Average Views: " << avg_views_astar << std::endl;
 	std::cout << "A* Algorithm Average Days on Account: " << avg_days_astar << std::endl;
+
+	cout << "" << endl;
+	cout << "" << endl;
+	cout << "" << endl;
+
 	
 }

@@ -80,10 +80,10 @@ std::string printBFSOutput(std::vector<int> inputBins) {
 			output_string = output_string + "0 - 1000 Views: " + std::to_string(inputBins[i]) + " || ";
 
         } else if (i < 2) {
-			output_string = output_string + " 1000 - 100000 Views: " + std::to_string(inputBins[i]) + " || ";
+			output_string = output_string + " 1000 - 10000 Views: " + std::to_string(inputBins[i]) + " || ";
 
         } else if (i < 3) {
-			output_string = output_string + " 100001 - 50000 Views: " + std::to_string(inputBins[i]) + " || ";
+			output_string = output_string + " 10001 - 50000 Views: " + std::to_string(inputBins[i]) + " || ";
 
         } else if (i < 4) {
 			output_string = output_string + " 50001 - 100000 Views: " + std::to_string(inputBins[i]) + " || ";
