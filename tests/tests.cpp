@@ -53,8 +53,14 @@ TEST_CASE("Verify BFS output string is accurate") {
     REQUIRE(printBFSOutput(sampleBFSout) == correct_string);
 }
 
-
-
+TEST_CASE("Verify that the Graph is initialized correctly - Small Sample") {
+	GraphInitializer gc(data_vector_SMALL, edgesVec_SMALL);
+	Graph outputGraph = gc.getGraph(); 
+	
+    REQUIRE(outputGraph.getStartingVertex() == "1991");
+	REQUIRE(outputGraph.getEdges().size() == 35324);
+	REQUIRE(outputGraph.getVertices().size() == 5447);
+}
 
 TEST_CASE("Verify that the Graph is initialized correctly - Large Sample") {
 	GraphInitializer gc(data_vector, edgesVec);
