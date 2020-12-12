@@ -12,15 +12,17 @@ Author: [Ansh Bhalla, Pranav Srinivasan, Raj Pulugurtha]
 - To run the Dataset Analysis, type the following command into the terminal: make && ./finalproj _____
 - Replace the blank with the country you would like to run the analysis on. The options are: DE, ENGB, ES, FR, PTBR, and RU.
 - In the case that the destination could not be found, the terminal will indicate: "The chosen destination could not be found. This may be due to the starting and ending nodes being in different connected components".
--
--
--
 - An example is provided below:
+
+
 ![image](makeimage.png)
 
 **Analysis Output**
 -
 - When the analysis command is run, the program outputs a series of values that were created based on the different algorithms. The first algorithm that the program runs is the BFS algorithm, which prints out the features of the user that is currently being traversed. Following this printing of the traversals, data is outputted regarding the views of all the people in the graph. The views are placed into categories based on the amounts and the terminal will display the number of users under each category of views. The second and third algorithms that the program runs is the Dijkstra Algorithm and the A* Algorithm which print out a variety of information. First, the source and destination vertexes are printed out followed by the path and distance that was taken to go from the source to the destination. The features of each user in the path are printed out for a better visualization. Finally, the average number of views and the average number of days of the account creation are then calculated and displayed. 
+
+
+![image](algoImage.png)
 
 
  
