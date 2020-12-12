@@ -9,8 +9,7 @@ Author: Ansh Bhalla, Pranav Srinivasan, Raj Pulugurtha
 
 **How To Run Dataset Analysis**
 -
-- To run the Dataset Analysis, type the following command into the terminal: make && ./finalproj _____
-- Replace the blank with the country you would like to run the analysis on. The options are: DE, ENGB, ES, FR, PTBR, and RU.
+- To run the Dataset Analysis, type the following command into the terminal: make && ./finalproj ES
 - In the case that the destination could not be found, the terminal will indicate: "The chosen destination could not be found. This may be due to the starting and ending nodes being in different connected components".
 - An example is provided below:
 
